@@ -40,7 +40,6 @@ public class RegisterForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup2 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -51,13 +50,8 @@ public class RegisterForm extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jPasswordField2 = new javax.swing.JPasswordField();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-
-        buttonGroup2.add(jRadioButton1);
-        buttonGroup2.add(jRadioButton2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -144,22 +138,6 @@ public class RegisterForm extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jRadioButton1.setText("Sales");
-        jRadioButton1.setFont(new Font("Serif",Font.PLAIN,15));
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
-            }
-        });
-
-        jRadioButton2.setText("Management");
-        jRadioButton2.setFont(new Font("Serif",Font.PLAIN,15));
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
-            }
-        });
-
         jButton1.setText("Register");
         jButton1.setBackground(Color.GREEN);
         jButton1.setFont(new Font("Serif",Font.BOLD,14));
@@ -182,30 +160,24 @@ public class RegisterForm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 107, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(101, 101, 101))
             .addGroup(layout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(28, 28, 28)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(49, 49, 49)))
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(38, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(101, 101, 101))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jRadioButton1)
-                        .addGap(28, 28, 28)
-                        .addComponent(jRadioButton2)
-                        .addGap(99, 99, 99))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(87, 87, 87))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,27 +190,15 @@ public class RegisterForm extends javax.swing.JFrame {
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addContainerGap(95, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
-
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -258,18 +218,14 @@ public class RegisterForm extends javax.swing.JFrame {
             else if(Compassword.hashCode() == 0)
             {
                 JOptionPane.showMessageDialog(null, "Confirmation Password field is empty!\nPlease fill it up. ", "Alert", JOptionPane.WARNING_MESSAGE);
-            }
+            }    
             else if(!password.equals(Compassword))
             {
                 JOptionPane.showMessageDialog(null, "Confirmation Password and password do not match!\nPlease key in again. ", "Alert", JOptionPane.WARNING_MESSAGE);
                 jPasswordField1.setText("");
                 jPasswordField2.setText("");
                 
-            }
-//            else if(!jRadioButton1.isSelected() && !jRadioButton2.isSelected())
-//            {
-//                JOptionPane.showMessageDialog(null, "Please choose the type of employee ", "Alert", JOptionPane.WARNING_MESSAGE);
-//            }
+            }         
             else
             {
                 try{
@@ -323,30 +279,18 @@ public class RegisterForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
 
     private void register() throws Exception {
@@ -360,63 +304,50 @@ public class RegisterForm extends javax.swing.JFrame {
         
         boolean fileExists = new File(fileName).exists();
         
-        // Check if the data already exists in the ArrayList
-        boolean exists = false;
-        for (String[] data : employeeData) {
-            if (data[1].equals(name)) {
-                //JOptionPane.showMessageDialog(null, data[1], "Alert", JOptionPane.WARNING_MESSAGE);
-                exists = true;
-                break;
+            
+        String id = "E0001";
+
+        String[] lastRow = employeeData.get(employeeData.size() - 1);
+
+        if(lastRow.length > 0){
+            id = lastRow[0];
+            String numericPart = id.substring(1);
+            int numericValue = Integer.parseInt(numericPart);
+
+            // Increment the integer value
+            numericValue++;
+
+            // Format the new ID with leading zeros
+            id = String.format("E%04d", numericValue);
+        }
+        // Add data to the ArrayList
+        String[] data = {id, name,"0" ,password};
+        employeeData.add(data);
+
+        // Save data to CSV file
+        try {
+            FileWriter fw = new FileWriter(fileName, true);
+
+            // Add header only if the file created for the first time
+            if (!fileExists) { 
+                fw.append("employeeId,employeeName,employeeStatus,password\r\n");
             }
+            // Append the data to the CSV file
+            for (String value : data) {
+                fw.append(value).append(",");
+            }
+            fw.append("\r\n");
+            fw.flush();
+            fw.close();
+            JOptionPane.showMessageDialog(null, "Registration Succesfull.");
+            new LeCarSystem().setVisible(true);
+            this.dispose();
+
+        } catch (IOException e) {
+            System.err.println("An error occurred while creating the CSV file: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error!!!\nThe CSV file is in used.\nPlease make sure it is close when in use.", "Alert", JOptionPane.WARNING_MESSAGE);
         }
         
-        if (!exists) {
-            
-            String id = "E0001";
-            
-            String[] lastRow = employeeData.get(employeeData.size() - 1);
-            
-            if(lastRow.length > 0){
-                id = lastRow[0];
-                String numericPart = id.substring(1);
-                int numericValue = Integer.parseInt(numericPart);
-
-                // Increment the integer value
-                numericValue++;
-
-                // Format the new ID with leading zeros
-                id = String.format("E%04d", numericValue);
-            }
-            // Add data to the ArrayList
-            String[] data = {id, name,"0" ,password};
-            employeeData.add(data);
-
-            // Save data to CSV file
-            try {
-                FileWriter fw = new FileWriter(fileName, true);
-
-                // Add header only if the file created for the first time
-                if (!fileExists) { 
-                    fw.append("employeeId,employeeName,employeeStatus,password\r\n");
-                }
-                // Append the data to the CSV file
-                for (String value : data) {
-                    fw.append(value).append(",");
-                }
-                fw.append("\r\n");
-                fw.flush();
-                fw.close();
-                JOptionPane.showMessageDialog(null, "Registration Succesfull.");
-                new LeCarSystem().setVisible(true);
-                this.dispose();
-                
-            } catch (IOException e) {
-                System.err.println("An error occurred while creating the CSV file: " + e.getMessage());
-                JOptionPane.showMessageDialog(null, "Error!!!\nThe CSV file is in used.\nPlease make sure it is close when in use.", "Alert", JOptionPane.WARNING_MESSAGE);
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Error!!!\nData can't save.\nThere is an existing username.", "Alert", JOptionPane.WARNING_MESSAGE);
-        }
     }
     
     //Storing CVS file in ArrayList that will be used later for checking

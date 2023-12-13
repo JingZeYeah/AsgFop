@@ -16,6 +16,7 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
+import static lecarsystem.LeCarSystem.employeeStatus;
 /**
  *
  * @author jze20
@@ -63,20 +64,37 @@ public class SalesPages extends javax.swing.JFrame {
                 }
                 else
                 {
-                    Vector row = new Vector();
-                    row.add(csvRecord.get(0));
-                    row.add(csvRecord.get(1));
-                    row.add(csvRecord.get(2));
-                    row.add(csvRecord.get(3));
-                    row.add(csvRecord.get(4));
-                    sales_data.addRow(row);
+                    if(LeCarSystem.employeeStatus == "0"){
+                        if(LeCarSystem.employeeID.equals(csvRecord.get(4))){
+                            Vector row = new Vector();
+                            row.add(csvRecord.get(0));
+                            row.add(csvRecord.get(1));
+                            row.add(csvRecord.get(2));
+                            row.add(csvRecord.get(3));
+                            row.add(csvRecord.get(4));
+                            sales_data.addRow(row);
+
+                        }
+
+                    }else{
+                        Vector row = new Vector();
+                        row.add(csvRecord.get(0));
+                        row.add(csvRecord.get(1));
+                        row.add(csvRecord.get(2));
+                        row.add(csvRecord.get(3));
+                        row.add(csvRecord.get(4));
+                        sales_data.addRow(row);
+                    }
+
                 }
             }
+
         }catch (Exception e){
             System.out.println("Error");
         }
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -100,6 +118,16 @@ public class SalesPages extends javax.swing.JFrame {
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setBackground(Color.BLUE);
+        jButton2.setForeground(Color.WHITE);
+        jButton2.setFont(new Font("Serif",Font.PLAIN,13));
+        jButton2.setText("Logout");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -149,16 +177,27 @@ public class SalesPages extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(33, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(33, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2)
+                        .addGap(14, 14, 14))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton2)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -198,6 +237,22 @@ public class SalesPages extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        if (evt.getSource() == jButton2) 
+        {
+            int clear = JOptionPane.showConfirmDialog(null, "Logout ?");
+            if (clear == JOptionPane.YES_OPTION)
+            {  
+                JOptionPane.showMessageDialog(null,"Logout Successful");
+                employeeStatus = "0";
+                new LeCarSystem().setVisible(true);
+                this.dispose();
+                
+            } 
+        } 
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -239,6 +294,7 @@ public class SalesPages extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;

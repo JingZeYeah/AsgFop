@@ -8,9 +8,16 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
+import static lecarsystem.LeCarSystem.employeeStatus;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -57,14 +64,22 @@ public class EmployeePage extends javax.swing.JFrame {
                     employee_data.addColumn(csvRecord.get(1));
                     employee_data.addColumn(csvRecord.get(2));
                     employee_data.addColumn(csvRecord.get(3));
+                    employee_data.addColumn("employeeSalary");
+                    employee_data.addColumn("employeeBonus");
+                    employee_data.addColumn("totalSalary");
                 }
                 else
                 {
+                    double salary = employeeSalary(csvRecord.get(0),csvRecord.get(2));
+                    double bonus = employeeBonus(csvRecord.get(0),csvRecord.get(2));
                     Vector row = new Vector();
                     row.add(csvRecord.get(0));
                     row.add(csvRecord.get(1));
                     row.add(csvRecord.get(2));
                     row.add(csvRecord.get(3));
+                    row.add(salary);
+                    row.add(bonus);
+                    row.add(salary + bonus);
                     employee_data.addRow(row);
                 }
             }
@@ -72,6 +87,8 @@ public class EmployeePage extends javax.swing.JFrame {
             System.out.println("Error");
         }
         jTable1 = new javax.swing.JTable();
+        jButton4 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -86,6 +103,25 @@ public class EmployeePage extends javax.swing.JFrame {
 
         jTable1.setModel(employee_data);
         jScrollPane1.setViewportView(jTable1);
+
+        jButton4.setBackground(Color.BLUE);
+        jButton4.setForeground(Color.WHITE);
+        jButton4.setFont(new Font("Serif",Font.PLAIN,13));
+        jButton4.setText("Logout");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Add Management");
+        jButton1.setBackground(Color.ORANGE);
+        jButton1.setFont(new Font("Serif",Font.PLAIN,13));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jMenu1.setText("Tables");
 
@@ -136,18 +172,29 @@ public class EmployeePage extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(49, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 506, Short.MAX_VALUE)
+                        .addComponent(jButton4)
+                        .addGap(18, 18, 18))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(58, Short.MAX_VALUE))
         );
 
         pack();
@@ -180,6 +227,29 @@ public class EmployeePage extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        if (evt.getSource() == jButton4) 
+        {
+            int clear = JOptionPane.showConfirmDialog(null, "Logout ?");
+            if (clear == JOptionPane.YES_OPTION)
+            {  
+                JOptionPane.showMessageDialog(null,"Logout Successful");
+                employeeStatus = "0";
+                new LeCarSystem().setVisible(true);
+                this.dispose();
+                
+            } 
+        } 
+
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        new AddManagement().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -218,6 +288,8 @@ public class EmployeePage extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
@@ -228,4 +300,111 @@ public class EmployeePage extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
+    private double employeeSalary(String employeeID, String status) throws Exception {
+       
+        double totalSalary, basicSalary, allowanceCap, commission = 0;
+
+        
+        if(status.equals("1")){
+            basicSalary = 2200;
+            allowanceCap = 350;
+        }else{
+           basicSalary = 1200;
+            allowanceCap = 250;
+        }
+        
+        List<String[]> salesData = readCsvFile("sales.csv");
+        List<String[]> vehicleData = readCsvFile("vehicle.csv");
+        
+        for (String[] sales : salesData) {
+            
+            String date = sales[1];
+            LocalDate currentDate = LocalDate.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
+            String todayMonth = currentDate.format(formatter);
+            
+            if (sales[4].equals(employeeID) && date.contains(todayMonth)){
+                for (String[] vehicle : vehicleData) {
+                    if(sales[2].equals(vehicle[0])){
+                        commission += Double.parseDouble(vehicle[4]) * 0.01;
+                        break;
+                    }
+                }
+            }
+        }
+        
+        totalSalary = commission + basicSalary + allowanceCap;
+        
+        return totalSalary;
+    }
+    
+    private double employeeBonus(String employeeID, String status) throws Exception {
+       
+        double totalbonus = 0, salesPrice = 0;
+        int count = 0;
+        List<String[]> salesData = readCsvFile("sales.csv");
+        List<String[]> vehicleData = readCsvFile("vehicle.csv");
+        
+        for (String[] sales : salesData) {
+            
+            String date = sales[1];
+            LocalDate currentDate = LocalDate.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
+            String todayMonth = currentDate.format(formatter);
+            
+            if (sales[4].equals(employeeID) && date.contains(todayMonth)){
+                for (String[] vehicle : vehicleData) {
+                    if(sales[2].equals(vehicle[0])){
+                        count++;
+                        salesPrice += Double.parseDouble(vehicle[4]);
+                        break;
+                    }
+                }
+            }
+        }
+        
+        if(status.equals("1")){
+            if (salesPrice <= 800000.00) {
+                totalbonus = salesPrice * 0.01;
+                
+            } else if (salesPrice > 800000.01 && salesPrice < 1600000.00) {
+                totalbonus = salesPrice * 0.0115;
+                
+            } else if (salesPrice > 1600000.01 && salesPrice < 2500000.00) {
+                totalbonus = salesPrice * 0.0125;
+                
+            } else if (salesPrice >= 2500000.01){
+                totalbonus = salesPrice * 0.0135;
+                
+            }
+        }else{
+            if(count > 15 || salesPrice > 1000000){
+                totalbonus = 500;
+            }
+        }
+        
+        
+        return totalbonus;
+    }
+    
+    //Storing CVS file in ArrayList that will be used later for checking
+    private List<String[]> readCsvFile(String fileName) throws IOException {
+        
+        List<String[]> records = new ArrayList<>();
+
+        try (FileReader reader = new FileReader(fileName);
+             CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT)) {
+
+            for (CSVRecord csvRecord : csvParser) {
+                String[] record = new String[csvRecord.size()];
+                for (int i = 0; i < csvRecord.size(); i++) {
+                    record[i] = csvRecord.get(i);
+                }
+                records.add(record);
+            }
+        }
+
+        return records;
+    }
 }

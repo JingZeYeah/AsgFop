@@ -8,9 +8,13 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
+import static lecarsystem.LeCarSystem.employeeStatus;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -39,14 +43,28 @@ public class CustomerPage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jEditorPane1 = new javax.swing.JEditorPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         File cust_csv = new File("cust.csv");
+        File sale_csv = new File("sales.csv");
         DefaultTableModel cust_data = new DefaultTableModel();
 
         try{
             int start = 0;
+            ArrayList<String> custList = new ArrayList<>();
             InputStreamReader inputstreamreader = new InputStreamReader(new FileInputStream(cust_csv));
             CSVParser csvParser = CSVFormat.DEFAULT.parse(inputstreamreader);
+
+            InputStreamReader inputstreamreadersale = new InputStreamReader(new FileInputStream(sale_csv));
+            CSVParser csvParserSale = CSVFormat.DEFAULT.parse(inputstreamreadersale);
+
+            for(CSVRecord csvSale:csvParserSale){
+                if(LeCarSystem.employeeID.equals(csvSale.get(4))){
+                    custList.add(csvSale.get(3));
+                }
+            }
 
             for(CSVRecord csvRecord:csvParser){
                 if(start == 0){
@@ -58,26 +76,46 @@ public class CustomerPage extends javax.swing.JFrame {
                 }
                 else
                 {
-                    Vector row = new Vector();
-                    row.add(csvRecord.get(0));
-                    row.add(csvRecord.get(1));
-                    row.add(csvRecord.get(2));
-                    row.add(csvRecord.get(3));
-                    cust_data.addRow(row);
+                    if(LeCarSystem.employeeStatus.equals("0")){
+                        if(custList.contains(csvRecord.get(0))){
+                            Vector row = new Vector();
+                            row.add(csvRecord.get(0));
+                            row.add(csvRecord.get(1));
+                            row.add(csvRecord.get(2));
+                            row.add(csvRecord.get(3));
+                            cust_data.addRow(row);
+                        }
+                    }else{
+                        Vector row = new Vector();
+                        row.add(csvRecord.get(0));
+                        row.add(csvRecord.get(1));
+                        row.add(csvRecord.get(2));
+                        row.add(csvRecord.get(3));
+                        cust_data.addRow(row);
+                    }
+
                 }
             }
         }catch (Exception e){
-            System.out.println("Error");
+            System.out.print("Error");
         }
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
+
+        jRadioButtonMenuItem1.setSelected(true);
+        jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
+
+        jScrollPane2.setViewportView(jEditorPane1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -93,6 +131,23 @@ public class CustomerPage extends javax.swing.JFrame {
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setBackground(Color.BLUE);
+        jButton4.setForeground(Color.WHITE);
+        jButton4.setFont(new Font("Serif",Font.PLAIN,13));
+        jButton4.setText("Logout");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Search");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -147,17 +202,30 @@ public class CustomerPage extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(36, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jButton4)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(16, Short.MAX_VALUE)
+                .addComponent(jButton4)
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -202,6 +270,34 @@ public class CustomerPage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        if (evt.getSource() == jButton4) 
+        {
+            int clear = JOptionPane.showConfirmDialog(null, "Logout ?");
+            if (clear == JOptionPane.YES_OPTION)
+            {  
+                JOptionPane.showMessageDialog(null,"Logout Successful");
+                employeeStatus = "0";
+                new LeCarSystem().setVisible(true);
+                this.dispose();
+                
+            } 
+        } 
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        if(evt.getSource() == jButton2){
+            String word = jTextField1.getText();
+            try{
+                search(word);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -239,6 +335,9 @@ public class CustomerPage extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
@@ -246,7 +345,94 @@ public class CustomerPage extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
+
+    private void search(String word) throws Exception{
+        File cust_name = new File("cust.csv");
+        File sale_name = new File("sales.csv");
+        DefaultTableModel NEW_CUST = new DefaultTableModel();
+
+        try{
+            int start = 0;
+            ArrayList<String> custList = new ArrayList<>();
+            InputStreamReader inputstreamreader = new InputStreamReader(new FileInputStream(cust_name));
+            CSVParser csvParser = CSVFormat.DEFAULT.parse(inputstreamreader);
+
+            InputStreamReader inputstreamreadersale = new InputStreamReader(new FileInputStream(sale_name));
+            CSVParser csvParserSale = CSVFormat.DEFAULT.parse(inputstreamreadersale);
+
+            for(CSVRecord csvSale:csvParserSale){
+                if(LeCarSystem.employeeID.equals(csvSale.get(4))){             
+                    custList.add(csvSale.get(3));
+                }
+            }
+
+            for(CSVRecord csvRecord:csvParser){
+                if(start == 0){
+                    start =1;
+                    NEW_CUST.addColumn(csvRecord.get(0));
+                    NEW_CUST.addColumn(csvRecord.get(1));
+                    NEW_CUST.addColumn(csvRecord.get(2));
+                    NEW_CUST.addColumn(csvRecord.get(3));
+                }
+                else
+                { 
+                    if(LeCarSystem.employeeStatus.equals("0")){
+                        if(custList.contains(csvRecord.get(0))){
+                            if(csvRecord.get(0).contains(word) || csvRecord.get(1).contains(word) || csvRecord.get(2).contains(word) || csvRecord.get(3).contains(word)){
+                                Vector row = new Vector();
+                                row.add(csvRecord.get(0));
+                                row.add(csvRecord.get(1));
+                                row.add(csvRecord.get(2));
+                                row.add(csvRecord.get(3));
+                                NEW_CUST.addRow(row);
+                            }
+                            
+                        }
+                    }else{
+                        if(csvRecord.get(0).contains(word) || csvRecord.get(1).contains(word) || csvRecord.get(2).contains(word) || csvRecord.get(3).contains(word)){
+                            Vector row = new Vector();
+                            row.add(csvRecord.get(0));
+                            row.add(csvRecord.get(1));
+                            row.add(csvRecord.get(2));
+                            row.add(csvRecord.get(3));
+                            NEW_CUST.addRow(row);
+                        }  
+                    }
+
+
+                }
+            }
+        }catch (Exception e){
+            System.out.print("Error");
+        }
+        
+        jTable1.setModel(NEW_CUST);
+        jScrollPane1.setViewportView(jTable1);
+    }
+    
+    private java.util.List<String[]> readCsvFile(String fileName) throws IOException {
+        
+        java.util.List<String[]> records = new ArrayList<>();
+
+        try (FileReader reader = new FileReader(fileName);
+             CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT)) {
+
+            for (CSVRecord csvRecord : csvParser) {
+                String[] record = new String[csvRecord.size()];
+                for (int i = 0; i < csvRecord.size(); i++) {
+                    record[i] = csvRecord.get(i);
+                }
+                records.add(record);
+            }
+        }
+
+        return records;
+    }
+
 }

@@ -461,66 +461,52 @@ public class AddCustomer extends javax.swing.JFrame {
         List<String[]> custData = readCsvFile(fileName);
         
         boolean fileExists = new File(fileName).exists();
-        
-        // Check if the data already exists in the ArrayList
-        boolean exists = false;
-        for (String[] data : custData) {
-            if (data[1].equals(custname)) {
-                //JOptionPane.showMessageDialog(null, data[1], "Alert", JOptionPane.WARNING_MESSAGE);
-                exists = true;
-                break;
-            }
+      
+        String id = "C0001";
+
+        String[] lastRow = custData.get(custData.size() - 1);
+
+        if(lastRow.length > 0){
+            id = lastRow[0];
+            String numericPart = id.substring(1);
+            int numericValue = Integer.parseInt(numericPart);
+
+            // Increment the integer value
+            numericValue++;
+
+            // Format the new ID with leading zeros
+            id = String.format("C%04d", numericValue);
         }
-        
-        if (!exists) {
-            
-            String id = "C0001";
-            
-            String[] lastRow = custData.get(custData.size() - 1);
-            
-            if(lastRow.length > 0){
-                id = lastRow[0];
-                String numericPart = id.substring(1);
-                int numericValue = Integer.parseInt(numericPart);
 
-                // Increment the integer value
-                numericValue++;
+        // Add data to the ArrayList
+        String[] data = {id, custname,phonenum ,postcode};
+        custData.add(data);
 
-                // Format the new ID with leading zeros
-                id = String.format("C%04d", numericValue);
+        // Save data to CSV file
+        try {
+            FileWriter fw = new FileWriter(fileName, true);
+
+            // Add header only if the file created for the first time
+            if (!fileExists) { 
+                fw.append("custId,custName,phoneNum,postcode\r\n");
             }
-            
-            // Add data to the ArrayList
-            String[] data = {id, custname,phonenum ,postcode};
-            custData.add(data);
-
-            // Save data to CSV file
-            try {
-                FileWriter fw = new FileWriter(fileName, true);
-
-                // Add header only if the file created for the first time
-                if (!fileExists) { 
-                    fw.append("custId,custName,phoneNum,postcode\r\n");
-                }
-                // Append the data to the CSV file
-                for (String value : data) {
-                    fw.append(value).append(",");
-                }
-                fw.append("\r\n");
-                fw.flush();
-                fw.close();
-                JOptionPane.showMessageDialog(null, "Data has been saved.");
-                jTextField2.setText("");
-                jTextField6.setText("");
-                jTextField7.setText("");
-                
-            } catch (IOException e) {
-                System.err.println("An error occurred while creating the CSV file: " + e.getMessage());
-                JOptionPane.showMessageDialog(null, "Error!!!\nThe CSV file is in used.\nPlease make sure it is close when in use.", "Alert", JOptionPane.WARNING_MESSAGE);
+            // Append the data to the CSV file
+            for (String value : data) {
+                fw.append(value).append(",");
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Error!!!\nData can't save.\nThere is an existing customer1.", "Alert", JOptionPane.WARNING_MESSAGE);
+            fw.append("\r\n");
+            fw.flush();
+            fw.close();
+            JOptionPane.showMessageDialog(null, "Data has been saved.");
+            jTextField2.setText("");
+            jTextField6.setText("");
+            jTextField7.setText("");
+
+        } catch (IOException e) {
+            System.err.println("An error occurred while creating the CSV file: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error!!!\nThe CSV file is in used.\nPlease make sure it is close when in use.", "Alert", JOptionPane.WARNING_MESSAGE);
         }
+       
     }
     
     //Storing CVS file in ArrayList that will be used later for checking

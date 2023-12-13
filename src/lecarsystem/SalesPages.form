@@ -85,19 +85,36 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jButton1" min="-2" pref="93" max="-2" attributes="0"/>
-                  <Component id="jLabel1" min="-2" pref="74" max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" min="-2" pref="514" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jButton1" min="-2" pref="93" max="-2" attributes="0"/>
+                          <Component id="jScrollPane1" min="-2" pref="514" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="33" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jLabel1" min="-2" pref="74" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace pref="33" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" pref="30" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" pref="30" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
               <EmptySpace max="32767" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="212" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -137,7 +154,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="File sales_csv = new File(&quot;sales.csv&quot;);&#xa;DefaultTableModel sales_data = new DefaultTableModel();&#xa;&#xa;try{&#xa;    int start = 0;&#xa;    InputStreamReader inputstreamreader = new InputStreamReader(new FileInputStream(sales_csv));&#xa;    CSVParser csvParser = CSVFormat.DEFAULT.parse(inputstreamreader);&#xa;&#xa;&#xa;    for(CSVRecord csvRecord:csvParser){&#xa;        if(start == 0){&#xa;            start =1;&#xa;            sales_data.addColumn(csvRecord.get(0));&#xa;            sales_data.addColumn(csvRecord.get(1));&#xa;            sales_data.addColumn(csvRecord.get(2));&#xa;            sales_data.addColumn(csvRecord.get(3));&#xa;            sales_data.addColumn(csvRecord.get(4));&#xa;        }&#xa;        else&#xa;        {&#xa;            Vector row = new Vector();&#xa;            row.add(csvRecord.get(0));&#xa;            row.add(csvRecord.get(1));&#xa;            row.add(csvRecord.get(2));&#xa;            row.add(csvRecord.get(3));&#xa;            row.add(csvRecord.get(4));&#xa;            sales_data.addRow(row);&#xa;        }&#xa;    }&#xa;}catch (Exception e){&#xa;    System.out.println(&quot;Error&quot;);&#xa;}"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="File sales_csv = new File(&quot;sales.csv&quot;);&#xa;DefaultTableModel sales_data = new DefaultTableModel();&#xa;&#xa;try{&#xa;    int start = 0;&#xa;    InputStreamReader inputstreamreader = new InputStreamReader(new FileInputStream(sales_csv));&#xa;    CSVParser csvParser = CSVFormat.DEFAULT.parse(inputstreamreader);&#xa;&#xa;    &#xa;    for(CSVRecord csvRecord:csvParser){&#xa;        if(start == 0){&#xa;            start =1;&#xa;            sales_data.addColumn(csvRecord.get(0));&#xa;            sales_data.addColumn(csvRecord.get(1));&#xa;            sales_data.addColumn(csvRecord.get(2));&#xa;            sales_data.addColumn(csvRecord.get(3));&#xa;            sales_data.addColumn(csvRecord.get(4));&#xa;        }&#xa;        else&#xa;        {&#xa;            if(LeCarSystem.employeeStatus == &quot;0&quot;){&#xa;                if(LeCarSystem.employeeID.equals(csvRecord.get(4))){&#xa;                    Vector row = new Vector();&#xa;                    row.add(csvRecord.get(0));&#xa;                    row.add(csvRecord.get(1));&#xa;                    row.add(csvRecord.get(2));&#xa;                    row.add(csvRecord.get(3));&#xa;                    row.add(csvRecord.get(4));&#xa;                    sales_data.addRow(row); &#xa;&#xa;&#xa;                }&#xa;&#xa;            }else{&#xa;                Vector row = new Vector();&#xa;                row.add(csvRecord.get(0));&#xa;                row.add(csvRecord.get(1));&#xa;                row.add(csvRecord.get(2));&#xa;                row.add(csvRecord.get(3));&#xa;                row.add(csvRecord.get(4));&#xa;                sales_data.addRow(row); &#xa;            }       &#xa;&#xa;        }&#xa;    }&#xa;&#xa;    &#xa;}catch (Exception e){&#xa;    System.out.println(&quot;Error&quot;);&#xa;}"/>
           </AuxValues>
         </Component>
       </SubComponents>
@@ -151,6 +168,17 @@
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jButton1.setBackground(Color.ORANGE);&#xa;jButton1.setFont(new Font(&quot;Serif&quot;,Font.PLAIN,13));"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButton2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Logout"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jButton2.setBackground(Color.BLUE);&#xa;jButton2.setForeground(Color.WHITE);&#xa;jButton2.setFont(new Font(&quot;Serif&quot;,Font.PLAIN,13));"/>
       </AuxValues>
     </Component>
   </SubComponents>
