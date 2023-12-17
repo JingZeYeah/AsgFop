@@ -30,6 +30,9 @@ public class RegisterForm extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         initComponents();
     }
+    
+    public static String key = "abc123";
+    public static int count = 3;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -50,6 +53,9 @@ public class RegisterForm extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jPasswordField2 = new javax.swing.JPasswordField();
+        jPanel8 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jPasswordField3 = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
@@ -138,6 +144,34 @@ public class RegisterForm extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jLabel9.setText("Secret Key :");
+        jLabel9.setFont(new Font("Serif",Font.PLAIN,15));
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPasswordField3, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(jPasswordField3))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 13, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+
         jButton1.setText("Register");
         jButton1.setBackground(Color.GREEN);
         jButton1.setFont(new Font("Serif",Font.BOLD,14));
@@ -165,18 +199,19 @@ public class RegisterForm extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(101, 101, 101))
             .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(28, 28, 28)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(49, 49, 49)))
-                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(88, 88, 88)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -190,11 +225,13 @@ public class RegisterForm extends javax.swing.JFrame {
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         pack();
@@ -206,6 +243,7 @@ public class RegisterForm extends javax.swing.JFrame {
             String name = jTextField3.getText();
             String password = jPasswordField1.getText();
             String Compassword = jPasswordField2.getText();
+            String secretkey = jPasswordField3.getText();     
             
             if(name.hashCode() == 0)
             {
@@ -218,22 +256,38 @@ public class RegisterForm extends javax.swing.JFrame {
             else if(Compassword.hashCode() == 0)
             {
                 JOptionPane.showMessageDialog(null, "Confirmation Password field is empty!\nPlease fill it up. ", "Alert", JOptionPane.WARNING_MESSAGE);
-            }    
+            }
+            else if(secretkey.hashCode() == 0)
+            {
+                JOptionPane.showMessageDialog(null, "Secret key field is empty!\nPlease fill it up. ", "Alert", JOptionPane.WARNING_MESSAGE);
+            }              
             else if(!password.equals(Compassword))
             {
                 JOptionPane.showMessageDialog(null, "Confirmation Password and password do not match!\nPlease key in again. ", "Alert", JOptionPane.WARNING_MESSAGE);
                 jPasswordField1.setText("");
                 jPasswordField2.setText("");
-                
-            }         
+
+            }
+            else if(!secretkey.equals(key))
+            {
+                count--;
+                JOptionPane.showMessageDialog(null, "Incorrect secret key!\n"+ count +" attempt(s) remain\nPlease key in again. ", "Alert", JOptionPane.WARNING_MESSAGE);
+                jPasswordField3.setText("");
+
+                if(count <= 0){
+                    JOptionPane.showMessageDialog(null, "You run out of attempts!\n Please try it again later", "Alert", JOptionPane.WARNING_MESSAGE);
+                    new LeCarSystem().setVisible(true);
+                    this.dispose();
+                }                   
+            }
             else
             {
                 try{
                    register(); 
                 }catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "Error!!!\nData can't save.\nThere is an existing username.", "Alert", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Error!!!\nData can't save.\nThere is an existing username.", "Alert", JOptionPane.WARNING_MESSAGE);               
                 } 
-            }
+            } 
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -285,11 +339,14 @@ public class RegisterForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JPasswordField jPasswordField2;
+    private javax.swing.JPasswordField jPasswordField3;
     private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 
