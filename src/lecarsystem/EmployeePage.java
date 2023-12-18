@@ -70,8 +70,8 @@ public class EmployeePage extends javax.swing.JFrame {
                 }
                 else
                 {
-                    double salary = employeeSalary(csvRecord.get(0),csvRecord.get(2));
-                    double bonus = employeeBonus(csvRecord.get(0),csvRecord.get(2));
+                    double salary = employeeSalary(csvRecord.get(0),csvRecord.get(2),"","");
+                    double bonus = employeeBonus(csvRecord.get(0),csvRecord.get(2),"","");
                     Vector row = new Vector();
                     row.add(csvRecord.get(0));
                     row.add(csvRecord.get(1));
@@ -84,13 +84,18 @@ public class EmployeePage extends javax.swing.JFrame {
                 }
             }
         }catch (Exception e){
-            System.out.println("Error");
+            e.printStackTrace();
         }
         jTable1 = new javax.swing.JTable();
         jButton4 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jTextField2 = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
+        jTextField4 = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -137,6 +142,24 @@ public class EmployeePage extends javax.swing.JFrame {
                 jTextField2ActionPerformed(evt);
             }
         });
+
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
+
+        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField4ActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Year :");
+
+        jLabel3.setText("Month :");
+
+        jLabel4.setText("Name :");
 
         jMenu1.setText("Tables");
 
@@ -191,31 +214,52 @@ public class EmployeePage extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jButton4)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(91, 91, 91))
+                                    .addComponent(jTextField2))))))
                 .addGap(38, 38, 38))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton4)
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton3)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton4)
+                        .addGap(35, 35, 35)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4))
+                        .addGap(3, 3, 3)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton3)
+                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         pack();
@@ -288,6 +332,14 @@ public class EmployeePage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
 
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -329,6 +381,9 @@ public class EmployeePage extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
@@ -338,11 +393,30 @@ public class EmployeePage extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
     // End of variables declaration//GEN-END:variables
 
-    private double employeeSalary(String employeeID, String status) throws Exception {
+    private double employeeSalary(String employeeID, String status, String yearInput, String monthInput) throws Exception {
        
         double totalSalary, basicSalary, allowanceCap, commission = 0;
+        
+        String year, month;
+        
+        LocalDate currentDate = LocalDate.now();
+        
+        if (yearInput.isEmpty()){year = Integer.toString(currentDate.getYear());}
+        else {year = yearInput;}
+
+        if (monthInput.isEmpty()){month = Integer.toString(currentDate.getMonthValue());}
+        else {
+            if(monthInput.length() == 2){
+                 month = monthInput;
+            }else{
+                 month = "0"+monthInput;
+            }
+               
+        }
 
         
         if(status.equals("1")){
@@ -357,11 +431,12 @@ public class EmployeePage extends javax.swing.JFrame {
         List<String[]> vehicleData = readCsvFile("vehicle.csv");
         
         for (String[] sales : salesData) {
-            
+           
             String date = sales[1];
-            LocalDate currentDate = LocalDate.now();
+            String dateString = year + "-" + month + "-01";
+            LocalDate yearmonth = LocalDate.parse(dateString);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
-            String todayMonth = currentDate.format(formatter);
+            String todayMonth = yearmonth.format(formatter);
             
             if (sales[4].equals(employeeID) && date.contains(todayMonth)){
                 for (String[] vehicle : vehicleData) {
@@ -378,9 +453,27 @@ public class EmployeePage extends javax.swing.JFrame {
         return totalSalary;
     }
     
-    private double employeeBonus(String employeeID, String status) throws Exception {
+    private double employeeBonus(String employeeID, String status, String yearInput, String monthInput) throws Exception {
        
         double totalbonus = 0, salesPrice = 0;
+        
+        String year, month;
+        
+        LocalDate currentDate = LocalDate.now();
+        
+        if (yearInput.isEmpty()){year = Integer.toString(currentDate.getYear());}
+        else {year = yearInput;}
+
+        if (monthInput.isEmpty()){month = Integer.toString(currentDate.getMonthValue());}
+        else {
+            if(monthInput.length() == 2){
+                 month = monthInput;
+            }else{
+                 month = "0"+monthInput;
+            }
+               
+        }
+        
         int count = 0;
         List<String[]> salesData = readCsvFile("sales.csv");
         List<String[]> vehicleData = readCsvFile("vehicle.csv");
@@ -388,9 +481,10 @@ public class EmployeePage extends javax.swing.JFrame {
         for (String[] sales : salesData) {
             
             String date = sales[1];
-            LocalDate currentDate = LocalDate.now();
+            String dateString = year + "-" + month + "-01";
+            LocalDate yearmonth = LocalDate.parse(dateString);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
-            String todayMonth = currentDate.format(formatter);
+            String todayMonth = yearmonth.format(formatter);
             
             if (sales[4].equals(employeeID) && date.contains(todayMonth)){
                 for (String[] vehicle : vehicleData) {
@@ -473,8 +567,8 @@ public class EmployeePage extends javax.swing.JFrame {
                 else
                 {
                     if(csvRecord.get(0).contains(word) || csvRecord.get(1).contains(word) || csvRecord.get(2).contains(word) || csvRecord.get(3).contains(word) || csvRecord.get(4).contains(word)){
-                        double salary = employeeSalary(csvRecord.get(0),csvRecord.get(2));
-                        double bonus = employeeBonus(csvRecord.get(0),csvRecord.get(2));
+                        double salary = employeeSalary(csvRecord.get(0),csvRecord.get(2),jTextField3.getText(),jTextField4.getText());
+                        double bonus = employeeBonus(csvRecord.get(0),csvRecord.get(2),jTextField3.getText(),jTextField4.getText());
                         Vector row = new Vector();
                         row.add(csvRecord.get(0));
                         row.add(csvRecord.get(1));
@@ -488,7 +582,7 @@ public class EmployeePage extends javax.swing.JFrame {
                 }
             }
         }catch (Exception e){
-                System.out.print("Error");
+                e.printStackTrace();
             }
 
             jTable1.setModel(NEW_EMPLOYEE);
