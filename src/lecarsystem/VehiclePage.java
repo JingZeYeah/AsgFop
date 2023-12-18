@@ -279,9 +279,9 @@ public class VehiclePage extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         if(evt.getSource() == jButton2){
-            String word = jTextField1.getText();
-            String salesInput = jTextField2.getText();
-            String accquireInput = jTextField3.getText();
+            String word = jTextField2.getText();
+            String salesInput = jTextField3.getText();
+            String accquireInput = jTextField1.getText();
             int sales,accquire;
 
             if (salesInput.isEmpty()){ sales = 0;}
@@ -368,12 +368,18 @@ public class VehiclePage extends javax.swing.JFrame {
                 }
                 else
                 {
-                    int salesValue = Integer.parseInt(csvRecord.get(4));
+                    String salesOutput = csvRecord.get(4);
+                    int salesValue;
+                    
+                    if (salesOutput.isEmpty()){ salesValue = 0;}
+                    else {salesValue = Integer.parseInt(salesOutput);}
+                    
                     int accquireValue = Integer.parseInt(csvRecord.get(2));
                     
                     if((csvRecord.get(0).contains(word) || csvRecord.get(1).contains(word) 
                             || csvRecord.get(2).contains(word) || csvRecord.get(3).contains(word) 
                             || csvRecord.get(4).contains(word)) && salesValue >= sales && accquireValue >= accquire){
+                        
                         Vector row = new Vector();
                         row.add(csvRecord.get(0));
                         row.add(csvRecord.get(1));
@@ -385,7 +391,7 @@ public class VehiclePage extends javax.swing.JFrame {
                 }
             }
         }catch (Exception e){
-                System.out.print("Error");
+                e.printStackTrace();
             }
 
             jTable1.setModel(NEW_VEHICLE);
