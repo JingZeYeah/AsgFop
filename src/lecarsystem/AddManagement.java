@@ -47,19 +47,19 @@ public class AddManagement extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtEmployName = new javax.swing.JTextField();
         jPanel6 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        txtPassword = new javax.swing.JPasswordField();
         jPanel7 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
-        jPasswordField2 = new javax.swing.JPasswordField();
+        txtConfirmPassword = new javax.swing.JPasswordField();
         jPanel8 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
-        jPasswordField3 = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        txtSecretKey = new javax.swing.JPasswordField();
+        btnRegister = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
+        btnClear = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -77,7 +77,7 @@ public class AddManagement extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
+                .addComponent(txtEmployName, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -85,7 +85,7 @@ public class AddManagement extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                    .addComponent(txtEmployName, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -101,7 +101,7 @@ public class AddManagement extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
+                .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -111,14 +111,14 @@ public class AddManagement extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(5, 5, 5)
-                        .addComponent(jPasswordField1))
+                        .addComponent(txtPassword))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 13, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
-        jLabel8.setText("Comfirm Password :");
+        jLabel8.setText("Confirm Password :");
         jLabel8.setFont(new Font("Serif",Font.PLAIN,15));
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
@@ -129,7 +129,7 @@ public class AddManagement extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPasswordField2, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
+                .addComponent(txtConfirmPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
@@ -139,7 +139,7 @@ public class AddManagement extends javax.swing.JFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(5, 5, 5)
-                        .addComponent(jPasswordField2))
+                        .addComponent(txtConfirmPassword))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 13, Short.MAX_VALUE)))
@@ -157,7 +157,7 @@ public class AddManagement extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPasswordField3, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
+                .addComponent(txtSecretKey, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
@@ -167,38 +167,38 @@ public class AddManagement extends javax.swing.JFrame {
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGap(5, 5, 5)
-                        .addComponent(jPasswordField3))
+                        .addComponent(txtSecretKey))
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 13, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
-        jButton1.setText("Register");
-        jButton1.setBackground(Color.GREEN);
-        jButton1.setFont(new Font("Serif",Font.BOLD,14));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnRegister.setText("Register");
+        btnRegister.setBackground(Color.GREEN);
+        btnRegister.setFont(new Font("Serif",Font.BOLD,14));
+        btnRegister.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                Register(evt);
             }
         });
 
-        jButton2.setText("Back");
-        jButton2.setBackground(Color.RED);
-        jButton2.setFont(new Font("Serif",Font.BOLD,14));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnBack.setText("Back");
+        btnBack.setBackground(Color.RED);
+        btnBack.setFont(new Font("Serif",Font.BOLD,14));
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                Back(evt);
             }
         });
 
-        jButton3.setText("Clear");
-        jButton3.setFont(new Font("Serif",Font.BOLD,14));
-        jButton3.setBackground(Color.BLUE);
-        jButton3.setForeground(Color.WHITE);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnClear.setText("Clear");
+        btnClear.setFont(new Font("Serif",Font.BOLD,14));
+        btnClear.setBackground(Color.BLUE);
+        btnClear.setForeground(Color.WHITE);
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                Clear(evt);
             }
         });
 
@@ -216,11 +216,11 @@ public class AddManagement extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(12, 12, 12)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(17, 17, 17)
-                        .addComponent(jButton3)
+                        .addComponent(btnClear)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -238,22 +238,22 @@ public class AddManagement extends javax.swing.JFrame {
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(45, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void Register(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Register
         // TODO add your handling code here:
-        if(evt.getSource() == jButton1){
-            String name = jTextField3.getText();
-            String password = jPasswordField1.getText();
-            String Compassword = jPasswordField2.getText();
-            String secretkey = jPasswordField3.getText();
+        if(evt.getSource() == btnRegister){
+            String name = txtEmployName.getText();
+            String password = txtPassword.getText();
+            String Compassword = txtConfirmPassword.getText();
+            String secretkey = txtSecretKey.getText();
 
             if(name.hashCode() == 0)
             {
@@ -274,15 +274,15 @@ public class AddManagement extends javax.swing.JFrame {
             else if(!password.equals(Compassword))
             {
                 JOptionPane.showMessageDialog(null, "Confirmation Password and password do not match!\nPlease key in again. ", "Alert", JOptionPane.WARNING_MESSAGE);
-                jPasswordField1.setText("");
-                jPasswordField2.setText("");
+                txtPassword.setText("");
+                txtConfirmPassword.setText("");
 
             }
             else if(!secretkey.equals(key))
             {
                 count--;
                 JOptionPane.showMessageDialog(null, "Incorrect secret key!\n"+ count +" attempt(s) remain\nPlease key in again. ", "Alert", JOptionPane.WARNING_MESSAGE);
-                jPasswordField3.setText("");
+                txtSecretKey.setText("");
 
                 if(count <= 0){
                     JOptionPane.showMessageDialog(null, "You run out of attempts!\n Please try it again later", "Alert", JOptionPane.WARNING_MESSAGE);
@@ -299,29 +299,29 @@ public class AddManagement extends javax.swing.JFrame {
                 }
             }
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_Register
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void Back(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Back
         // TODO add your handling code here:
         new EmployeePage().setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_Back
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void Clear(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Clear
         // TODO add your handling code here:
-        if (evt.getSource() == jButton3)
+        if (evt.getSource() == btnClear)
         {
             int clear = JOptionPane.showConfirmDialog(null, "Are you sure?");
             if (clear == JOptionPane.YES_OPTION)
             {
-                 jTextField3.setText("");
-                jPasswordField1.setText("");
-                jPasswordField2.setText("");
-                jPasswordField3.setText("");
+                txtEmployName.setText("");
+                txtPassword.setText("");
+                txtConfirmPassword.setText("");
+                txtSecretKey.setText("");
                 JOptionPane.showMessageDialog(null, "Input has been cleared");
             }
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_Clear
 
     /**
      * @param args the command line arguments
@@ -359,9 +359,9 @@ public class AddManagement extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnClear;
+    private javax.swing.JButton btnRegister;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
@@ -371,23 +371,24 @@ public class AddManagement extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JPasswordField jPasswordField3;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JPasswordField txtConfirmPassword;
+    private javax.swing.JTextField txtEmployName;
+    private javax.swing.JPasswordField txtPassword;
+    private javax.swing.JPasswordField txtSecretKey;
     // End of variables declaration//GEN-END:variables
     private void register() throws Exception {
         
         String fileName = "user.csv";
         
-        String name = jTextField3.getText();
-        String password = jPasswordField1.getText();
+        String name = txtEmployName.getText();
+        String password = txtPassword.getText();
         
-        List<String[]> employeeData = readCsvFile(fileName);
+        //Storing CVS file in ArrayList that will be used later for checking
+        Function csvReader = new Function();
+        List<String[]> employeeData = csvReader.readCsvFile(fileName);
         
         boolean fileExists = new File(fileName).exists();
-        
-            
+         
         String id = "E0001";
 
         String[] lastRow = employeeData.get(employeeData.size() - 1);
@@ -423,10 +424,10 @@ public class AddManagement extends javax.swing.JFrame {
             fw.flush();
             fw.close();
             JOptionPane.showMessageDialog(null, "Registration Succesfull.");
-            jTextField3.setText("");
-            jPasswordField1.setText("");
-            jPasswordField2.setText("");
-            jPasswordField3.setText("");
+            txtEmployName.setText("");
+            txtPassword.setText("");
+            txtConfirmPassword.setText("");
+            txtSecretKey.setText("");
            
 
         } catch (IOException e) {
@@ -434,25 +435,5 @@ public class AddManagement extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error!!!\nThe CSV file is in used.\nPlease make sure it is close when in use.", "Alert", JOptionPane.WARNING_MESSAGE);
         }
         
-    }
-    
-    //Storing CVS file in ArrayList that will be used later for checking
-    private List<String[]> readCsvFile(String fileName) throws IOException {
-        
-        List<String[]> records = new ArrayList<>();
-
-        try (FileReader reader = new FileReader(fileName);
-             CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT)) {
-
-            for (CSVRecord csvRecord : csvParser) {
-                String[] record = new String[csvRecord.size()];
-                for (int i = 0; i < csvRecord.size(); i++) {
-                    record[i] = csvRecord.get(i);
-                }
-                records.add(record);
-            }
-        }
-
-        return records;
     }
 }

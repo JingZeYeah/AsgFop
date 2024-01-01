@@ -42,17 +42,17 @@ public class AddCustomer extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtCustName = new javax.swing.JTextField();
         jPanel6 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        txtPhoneNum = new javax.swing.JTextField();
         jPanel7 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        txtPostcode = new javax.swing.JTextField();
         jPanel8 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnAdd = new javax.swing.JButton();
+        btnClear = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -68,12 +68,6 @@ public class AddCustomer extends javax.swing.JFrame {
         jLabel3.setText("Customer Name :");
         jLabel3.setFont(new Font("Serif",Font.PLAIN,13));
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -82,7 +76,7 @@ public class AddCustomer extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtCustName, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -90,19 +84,13 @@ public class AddCustomer extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                    .addComponent(txtCustName, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
         jLabel7.setText("Phone Number :");
         jLabel7.setFont(new Font("Serif",Font.PLAIN,13));
-
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -112,7 +100,7 @@ public class AddCustomer extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtPhoneNum, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
@@ -120,19 +108,13 @@ public class AddCustomer extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                    .addComponent(txtPhoneNum, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
         jLabel8.setText("Postcode :");
         jLabel8.setFont(new Font("Serif",Font.PLAIN,13));
-
-        jTextField7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField7ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -142,7 +124,7 @@ public class AddCustomer extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtPostcode, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
@@ -150,38 +132,38 @@ public class AddCustomer extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                    .addComponent(txtPostcode, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        jButton1.setText("Add");
-        jButton1.setFont(new Font("Serif",Font.PLAIN,13));
-        jButton1.setBackground(Color.GREEN);
-        jButton1.setForeground(Color.WHITE);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnAdd.setText("Add");
+        btnAdd.setFont(new Font("Serif",Font.PLAIN,13));
+        btnAdd.setBackground(Color.GREEN);
+        btnAdd.setForeground(Color.WHITE);
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                Add(evt);
             }
         });
 
-        jButton2.setText("Clear");
-        jButton2.setFont(new Font("Serif",Font.PLAIN,13));
-        jButton2.setBackground(Color.BLUE);
-        jButton2.setForeground(Color.WHITE);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnClear.setText("Clear");
+        btnClear.setFont(new Font("Serif",Font.PLAIN,13));
+        btnClear.setBackground(Color.BLUE);
+        btnClear.setForeground(Color.WHITE);
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                Clear(evt);
             }
         });
 
-        jButton3.setText("Back");
-        jButton3.setFont(new Font("Serif",Font.PLAIN,13));
-        jButton3.setBackground(Color.RED);
-        jButton3.setForeground(Color.WHITE);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnBack.setText("Back");
+        btnBack.setFont(new Font("Serif",Font.PLAIN,13));
+        btnBack.setBackground(Color.RED);
+        btnBack.setForeground(Color.WHITE);
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                Back(evt);
             }
         });
 
@@ -191,11 +173,11 @@ public class AddCustomer extends javax.swing.JFrame {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 69, Short.MAX_VALUE)
+                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 69, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
@@ -203,9 +185,9 @@ public class AddCustomer extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnClear, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                    .addComponent(btnBack, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAdd, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -301,24 +283,12 @@ public class AddCustomer extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void Add(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Add
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
-
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
-
-    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField7ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        if(evt.getSource() == jButton1){
-            String custname = jTextField2.getText();
-            String phonenum = jTextField6.getText();
-            String postcode = jTextField7.getText();
+        if(evt.getSource() == btnAdd){
+            String custname = txtCustName.getText();
+            String phonenum = txtPhoneNum.getText();
+            String postcode = txtPostcode.getText();
            
             if(custname.hashCode() == 0)
             {
@@ -335,12 +305,12 @@ public class AddCustomer extends javax.swing.JFrame {
             else if (!phonenum.matches("-?\\d+(\\.\\d+)?")) 
             {
                 JOptionPane.showMessageDialog(null, "Incorrect format at Phone number field!\nPlease fill it again. ", "Alert", JOptionPane.WARNING_MESSAGE);
-                jTextField6.setText("");
+                txtPhoneNum.setText("");
             }
             else if (!postcode.matches("-?\\d+(\\.\\d+)?")) 
             {
                 JOptionPane.showMessageDialog(null, "Incorrect format at Postcode field!\nPlease fill it again. ", "Alert", JOptionPane.WARNING_MESSAGE);
-                jTextField7.setText("");
+                txtPostcode.setText("");
             }
             else
             {
@@ -353,28 +323,28 @@ public class AddCustomer extends javax.swing.JFrame {
                 }
             }
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_Add
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void Clear(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Clear
         // TODO add your handling code here:
-        if (evt.getSource() == jButton2)
+        if (evt.getSource() == btnClear)
         {
             int clear = JOptionPane.showConfirmDialog(null, "Are you sure?");
             if (clear == JOptionPane.YES_OPTION)
             {
-                jTextField2.setText("");
-                jTextField6.setText("");
-                jTextField7.setText("");
+                txtCustName.setText("");
+                txtPhoneNum.setText("");
+                txtPostcode.setText("");
                 JOptionPane.showMessageDialog(null, "Input has been cleared");
             }
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_Clear
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void Back(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Back
         // TODO add your handling code here:
         new CustomerPage().setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_Back
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
@@ -428,9 +398,9 @@ public class AddCustomer extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnClear;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel7;
@@ -445,20 +415,22 @@ public class AddCustomer extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField txtCustName;
+    private javax.swing.JTextField txtPhoneNum;
+    private javax.swing.JTextField txtPostcode;
     // End of variables declaration//GEN-END:variables
 
     private void insertCust() throws Exception{
         
         String fileName = "custtest.csv";
         
-        String custname = jTextField2.getText();
-        String phonenum = jTextField6.getText();
-        String postcode = jTextField7.getText();
+        String custname = txtCustName.getText();
+        String phonenum = txtPhoneNum.getText();
+        String postcode = txtPostcode.getText();
         
-        List<String[]> custData = readCsvFile(fileName);
+        //Storing CVS file in ArrayList that will be used later for checking
+        Function readCSV = new Function();
+        List<String[]> custData = readCSV.readCsvFile(fileName);
         
         boolean fileExists = new File(fileName).exists();
       
@@ -498,34 +470,14 @@ public class AddCustomer extends javax.swing.JFrame {
             fw.flush();
             fw.close();
             JOptionPane.showMessageDialog(null, "Data has been saved.");
-            jTextField2.setText("");
-            jTextField6.setText("");
-            jTextField7.setText("");
+            txtCustName.setText("");
+            txtPhoneNum.setText("");
+            txtPostcode.setText("");
 
         } catch (IOException e) {
             System.err.println("An error occurred while creating the CSV file: " + e.getMessage());
             JOptionPane.showMessageDialog(null, "Error!!!\nThe CSV file is in used.\nPlease make sure it is close when in use.", "Alert", JOptionPane.WARNING_MESSAGE);
         }
        
-    }
-    
-    //Storing CVS file in ArrayList that will be used later for checking
-    private List<String[]> readCsvFile(String fileName) throws IOException {
-        
-        List<String[]> records = new ArrayList<>();
-
-        try (FileReader reader = new FileReader(fileName);
-             CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT)) {
-
-            for (CSVRecord csvRecord : csvParser) {
-                String[] record = new String[csvRecord.size()];
-                for (int i = 0; i < csvRecord.size(); i++) {
-                    record[i] = csvRecord.get(i);
-                }
-                records.add(record);
-            }
-        }
-
-        return records;
     }
 }

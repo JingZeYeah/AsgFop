@@ -43,25 +43,19 @@ public class LeCarSystem extends javax.swing.JFrame {
 
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtEmployName = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        txtPassword = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnRegister = new javax.swing.JButton();
+        btnLogin = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Employee Name : ");
         jLabel1.setFont(new Font("Serif",Font.PLAIN,15));
-
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -71,14 +65,14 @@ public class LeCarSystem extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtEmployName, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(13, 13, 13)
-                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
+                .addComponent(txtEmployName, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -86,12 +80,6 @@ public class LeCarSystem extends javax.swing.JFrame {
 
         jLabel2.setText("Password : ");
         jLabel2.setFont(new Font("Serif",Font.PLAIN,15));
-
-        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField1ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -101,12 +89,12 @@ public class LeCarSystem extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPasswordField1)
+            .addComponent(txtPassword)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE))
@@ -115,13 +103,13 @@ public class LeCarSystem extends javax.swing.JFrame {
         jLabel3.setText("Welcome to LeCars");
         jLabel3.setFont(new Font("Sans_Serif", Font.BOLD, 20));
 
-        jButton2.setText("Register");
-        jButton2.setBackground(Color.BLUE);
-        jButton2.setForeground(Color.WHITE);
-        jButton2.setFont(new Font("Serif", Font.BOLD, 15));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnRegister.setText("Register");
+        btnRegister.setBackground(Color.BLUE);
+        btnRegister.setForeground(Color.WHITE);
+        btnRegister.setFont(new Font("Serif", Font.BOLD, 15));
+        btnRegister.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                Register(evt);
             }
         });
 
@@ -131,23 +119,23 @@ public class LeCarSystem extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+                .addComponent(btnRegister, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 8, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jButton1.setText("Login");
-        jButton1.setBackground(Color.GREEN);
-        jButton1.setForeground(Color.BLACK);
-        jButton1.setFont(new Font("Serif", Font.BOLD, 15));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnLogin.setText("Login");
+        btnLogin.setBackground(Color.GREEN);
+        btnLogin.setForeground(Color.BLACK);
+        btnLogin.setFont(new Font("Serif", Font.BOLD, 15));
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                Login(evt);
             }
         });
 
@@ -165,7 +153,7 @@ public class LeCarSystem extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(182, 182, 182)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(142, 142, 142)
@@ -182,7 +170,7 @@ public class LeCarSystem extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2, 2, 2)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(40, Short.MAX_VALUE))
@@ -191,15 +179,10 @@ public class LeCarSystem extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        if(evt.getSource() == jButton1){
-            String id = jTextField1.getText();
-            String password = jPasswordField1.getText();
+    private void Login(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Login
+        if(evt.getSource() == btnLogin){
+            String id = txtEmployName.getText();
+            String password = txtPassword.getText();
             
             if(id.hashCode() == 0)
             {
@@ -219,17 +202,13 @@ public class LeCarSystem extends javax.swing.JFrame {
                
             }
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_Login
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-            // TODO add your handling code here:
+    private void Register(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Register
+
             new RegisterForm().setVisible(true);
             this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField1ActionPerformed
+    }//GEN-LAST:event_Register
 
     /**
      * @param args the command line arguments
@@ -268,25 +247,27 @@ public class LeCarSystem extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnLogin;
+    private javax.swing.JButton btnRegister;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtEmployName;
+    private javax.swing.JPasswordField txtPassword;
     // End of variables declaration//GEN-END:variables
 
     private void Login() throws Exception{
         String fileName = "user.csv";
         
-        String name = jTextField1.getText();
-        String password = jPasswordField1.getText();
+        String name = txtEmployName.getText();
+        String password = txtPassword.getText();
         
-        List<String[]> employeeData = readCsvFile(fileName);
+        //Storing CVS file in ArrayList that will be used later for checking
+        Function readCSV = new Function();
+        List<String[]> employeeData = readCSV.readCsvFile(fileName);
         
         boolean exist = false;
         for (String[] data : employeeData) {
@@ -311,25 +292,5 @@ public class LeCarSystem extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error!!!\nInvalid username or password.", "Alert", JOptionPane.WARNING_MESSAGE);
         }
         
-    }
-    
-    //Storing CVS file in ArrayList that will be used later for checking
-    private java.util.List<String[]> readCsvFile(String fileName) throws IOException {
-        
-        List<String[]> records = new ArrayList<>();
-
-        try (FileReader reader = new FileReader(fileName);
-             CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT)) {
-
-            for (CSVRecord csvRecord : csvParser) {
-                String[] record = new String[csvRecord.size()];
-                for (int i = 0; i < csvRecord.size(); i++) {
-                    record[i] = csvRecord.get(i);
-                }
-                records.add(record);
-            }
-        }
-
-        return records;
     }
 }

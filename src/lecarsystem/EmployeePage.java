@@ -6,6 +6,7 @@ package lecarsystem;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
@@ -27,11 +28,20 @@ import org.apache.commons.csv.CSVRecord;
  * @author jze20
  */
 public class EmployeePage extends javax.swing.JFrame {
-
+    private static String[] filePath;
+    private Function function = new Function();
     /**
      * Creates new form EmployeePage
      */
     public EmployeePage() {
+        try{
+            BufferedReader reader = new BufferedReader(new FileReader("path.txt"));
+            String line = reader.readLine();
+            filePath = line.split(",");
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
@@ -49,109 +59,100 @@ public class EmployeePage extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        File employee_csv = new File("employee.csv");
-        DefaultTableModel employee_data = new DefaultTableModel();
-
         try{
-            int start = 0;
-            InputStreamReader inputstreamreader = new InputStreamReader(new FileInputStream(employee_csv));
-            CSVParser csvParser = CSVFormat.DEFAULT.parse(inputstreamreader);
+            BufferedReader reader = new BufferedReader(new FileReader("path.txt"));
+            String line = reader.readLine();
+            String [] filepath = line.split(",");
 
-            for(CSVRecord csvRecord:csvParser){
-                if(start == 0){
-                    start =1;
-                    employee_data.addColumn(csvRecord.get(0));
-                    employee_data.addColumn(csvRecord.get(1));
-                    employee_data.addColumn(csvRecord.get(2));
-                    employee_data.addColumn(csvRecord.get(3));
-                    employee_data.addColumn("employeeSalary");
-                    employee_data.addColumn("employeeBonus");
-                    employee_data.addColumn("totalSalary");
+            File employee_csv = new File(filepath[1]);
+            DefaultTableModel employee_data = new DefaultTableModel();
+
+            try{
+                int start = 0;
+                InputStreamReader inputstreamreader = new InputStreamReader(new FileInputStream(employee_csv));
+                CSVParser csvParser = CSVFormat.DEFAULT.parse(inputstreamreader);
+
+                for(CSVRecord csvRecord:csvParser){
+                    if(start == 0){
+                        start =1;
+                        employee_data.addColumn(csvRecord.get(0));
+                        employee_data.addColumn(csvRecord.get(1));
+                        employee_data.addColumn(csvRecord.get(2));
+                        employee_data.addColumn(csvRecord.get(3));
+                        employee_data.addColumn("employeeSalary");
+                        employee_data.addColumn("employeeBonus");
+                        employee_data.addColumn("totalSalary");
+                    }
+                    else
+                    {
+                        double salary = employeeSalary(csvRecord.get(0),csvRecord.get(2),"","");
+                        double bonus = employeeBonus(csvRecord.get(0),csvRecord.get(2),"","");
+                        Vector row = new Vector();
+                        row.add(csvRecord.get(0));
+                        row.add(csvRecord.get(1));
+                        row.add(csvRecord.get(2));
+                        row.add(csvRecord.get(3));
+                        row.add(salary);
+                        row.add(bonus);
+                        row.add(salary + bonus);
+                        employee_data.addRow(row);
+                    }
                 }
-                else
-                {
-                    double salary = employeeSalary(csvRecord.get(0),csvRecord.get(2),"","");
-                    double bonus = employeeBonus(csvRecord.get(0),csvRecord.get(2),"","");
-                    Vector row = new Vector();
-                    row.add(csvRecord.get(0));
-                    row.add(csvRecord.get(1));
-                    row.add(csvRecord.get(2));
-                    row.add(csvRecord.get(3));
-                    row.add(salary);
-                    row.add(bonus);
-                    row.add(salary + bonus);
-                    employee_data.addRow(row);
-                }
+            }catch (Exception e){
+                e.printStackTrace();
             }
+            EmployeeTable = new javax.swing.JTable();
+            btnLogout = new javax.swing.JButton();
+            btnAddManagement = new javax.swing.JButton();
+            btnSearch = new javax.swing.JButton();
+            txtWord = new javax.swing.JTextField();
+            txtYear = new javax.swing.JTextField();
+            txtMonth = new javax.swing.JTextField();
+            jLabel2 = new javax.swing.JLabel();
+            jLabel3 = new javax.swing.JLabel();
+            jLabel4 = new javax.swing.JLabel();
+            btnImport = new javax.swing.JButton();
+            jMenuBar1 = new javax.swing.JMenuBar();
+            jMenu1 = new javax.swing.JMenu();
+            jMenuItem1 = new javax.swing.JMenuItem();
+            jMenuItem2 = new javax.swing.JMenuItem();
+            jMenuItem3 = new javax.swing.JMenuItem();
+            jMenuItem4 = new javax.swing.JMenuItem();
+
+            setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+            jLabel1.setText("Employee");
+            jLabel1.setFont(new Font("Sans-Serif",Font.BOLD,18));
+
+            EmployeeTable.setModel(employee_data);
         }catch (Exception e){
             e.printStackTrace();
         }
-        jTable1 = new javax.swing.JTable();
-        jButton4 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        jScrollPane1.setViewportView(EmployeeTable);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel1.setText("Employee");
-        jLabel1.setFont(new Font("Sans-Serif",Font.BOLD,18));
-
-        jTable1.setModel(employee_data);
-        jScrollPane1.setViewportView(jTable1);
-
-        jButton4.setBackground(Color.BLUE);
-        jButton4.setForeground(Color.WHITE);
-        jButton4.setFont(new Font("Serif",Font.PLAIN,13));
-        jButton4.setText("Logout");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnLogout.setBackground(Color.BLUE);
+        btnLogout.setForeground(Color.WHITE);
+        btnLogout.setFont(new Font("Serif",Font.PLAIN,13));
+        btnLogout.setText("Logout");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                Logout(evt);
             }
         });
 
-        jButton1.setText("Add Management");
-        jButton1.setBackground(Color.ORANGE);
-        jButton1.setFont(new Font("Serif",Font.PLAIN,13));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnAddManagement.setText("Add Management");
+        btnAddManagement.setBackground(Color.ORANGE);
+        btnAddManagement.setFont(new Font("Serif",Font.PLAIN,13));
+        btnAddManagement.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                AddManagement(evt);
             }
         });
 
-        jButton3.setText("Search");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
-
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
-            }
-        });
-
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                Search(evt);
             }
         });
 
@@ -159,7 +160,14 @@ public class EmployeePage extends javax.swing.JFrame {
 
         jLabel3.setText("Month :");
 
-        jLabel4.setText("Name :");
+        jLabel4.setText("Word :");
+
+        btnImport.setText("Import");
+        btnImport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Import(evt);
+            }
+        });
 
         jMenu1.setText("Tables");
 
@@ -209,30 +217,33 @@ public class EmployeePage extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(44, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnAddManagement, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnImport))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jButton4)
+                        .addComponent(btnLogout)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton3)
+                                .addComponent(btnSearch)
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(91, 91, 91))
-                                    .addComponent(jTextField2))))))
+                                    .addComponent(txtWord))))))
                 .addGap(38, 38, 38))
         );
         layout.setVerticalGroup(
@@ -241,7 +252,7 @@ public class EmployeePage extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton4)
+                        .addComponent(btnLogout)
                         .addGap(35, 35, 35)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -251,14 +262,16 @@ public class EmployeePage extends javax.swing.JFrame {
                             .addComponent(jLabel4))
                         .addGap(3, 3, 3)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtWord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSearch)
+                            .addComponent(txtMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAddManagement, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnImport))
                 .addContainerGap(51, Short.MAX_VALUE))
         );
 
@@ -293,9 +306,9 @@ public class EmployeePage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void Logout(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Logout
         // TODO add your handling code here:
-        if (evt.getSource() == jButton4) 
+        if (evt.getSource() == btnLogout) 
         {
             int clear = JOptionPane.showConfirmDialog(null, "Logout ?");
             if (clear == JOptionPane.YES_OPTION)
@@ -308,37 +321,34 @@ public class EmployeePage extends javax.swing.JFrame {
             } 
         } 
 
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_Logout
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void AddManagement(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddManagement
         // TODO add your handling code here:
         new AddManagement().setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_AddManagement
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void Search(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Search
         // TODO add your handling code here:
-        if(evt.getSource() == jButton3){
-            String word = jTextField2.getText();
+        if(evt.getSource() == btnSearch){
+            String word = txtWord.getText();
             try{
                 search(word);
             }catch (Exception e){
                 e.printStackTrace();
             }
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_Search
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void Import(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Import
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
-
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
-
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+        if(evt.getSource() == btnImport){
+        function.importfunction(1);
+        new EmployeePage().setVisible(true);
+        this.dispose();
+        }
+    }//GEN-LAST:event_Import
 
     /**
      * @param args the command line arguments
@@ -376,10 +386,12 @@ public class EmployeePage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable EmployeeTable;
+    private javax.swing.JButton btnAddManagement;
+    private javax.swing.JButton btnImport;
+    private javax.swing.JButton btnLogout;
+    private javax.swing.JButton btnSearch;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -391,10 +403,9 @@ public class EmployeePage extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField txtMonth;
+    private javax.swing.JTextField txtWord;
+    private javax.swing.JTextField txtYear;
     // End of variables declaration//GEN-END:variables
 
     private double employeeSalary(String employeeID, String status, String yearInput, String monthInput) throws Exception {
@@ -408,7 +419,16 @@ public class EmployeePage extends javax.swing.JFrame {
         if (yearInput.isEmpty()){year = Integer.toString(currentDate.getYear());}
         else {year = yearInput;}
 
-        if (monthInput.isEmpty()){month = Integer.toString(currentDate.getMonthValue());}
+        if (monthInput.isEmpty()){
+            month = Integer.toString(currentDate.getMonthValue());
+            
+            if(month.length() == 2){
+                 month = month;
+            }else{
+                 month = "0"+month;
+            }
+        
+        }
         else {
             if(monthInput.length() == 2){
                  month = monthInput;
@@ -427,8 +447,9 @@ public class EmployeePage extends javax.swing.JFrame {
             allowanceCap = 250;
         }
         
-        List<String[]> salesData = readCsvFile("sales.csv");
-        List<String[]> vehicleData = readCsvFile("vehicle.csv");
+        //Storing CVS file in ArrayList that will be used later for checking
+        List<String[]> salesData = function.readCsvFile(filePath[2]);
+        List<String[]> vehicleData = function.readCsvFile(filePath[3]);
         
         for (String[] sales : salesData) {
            
@@ -464,7 +485,13 @@ public class EmployeePage extends javax.swing.JFrame {
         if (yearInput.isEmpty()){year = Integer.toString(currentDate.getYear());}
         else {year = yearInput;}
 
-        if (monthInput.isEmpty()){month = Integer.toString(currentDate.getMonthValue());}
+        if (monthInput.isEmpty()){month = Integer.toString(currentDate.getMonthValue());
+         if(month.length() == 2){
+                 month = month;
+            }else{
+                 month = "0"+month;
+            }
+        }
         else {
             if(monthInput.length() == 2){
                  month = monthInput;
@@ -475,8 +502,10 @@ public class EmployeePage extends javax.swing.JFrame {
         }
         
         int count = 0;
-        List<String[]> salesData = readCsvFile("sales.csv");
-        List<String[]> vehicleData = readCsvFile("vehicle.csv");
+        
+        //Storing CVS file in ArrayList that will be used later for checking
+        List<String[]> salesData = function.readCsvFile(filePath[2]);
+        List<String[]> vehicleData = function.readCsvFile(filePath[3]);
         
         for (String[] sales : salesData) {
             
@@ -521,28 +550,8 @@ public class EmployeePage extends javax.swing.JFrame {
         return totalbonus;
     }
     
-    //Storing CVS file in ArrayList that will be used later for checking
-    private List<String[]> readCsvFile(String fileName) throws IOException {
-        
-        List<String[]> records = new ArrayList<>();
-
-        try (FileReader reader = new FileReader(fileName);
-             CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT)) {
-
-            for (CSVRecord csvRecord : csvParser) {
-                String[] record = new String[csvRecord.size()];
-                for (int i = 0; i < csvRecord.size(); i++) {
-                    record[i] = csvRecord.get(i);
-                }
-                records.add(record);
-            }
-        }
-
-        return records;
-    }
-    
     private void search(String word) throws Exception{
-        File employee_csv = new File("employee.csv");
+        File employee_csv = new File(filePath[1]);
         DefaultTableModel NEW_EMPLOYEE = new DefaultTableModel();
 
         try{
@@ -566,9 +575,10 @@ public class EmployeePage extends javax.swing.JFrame {
                 }
                 else
                 {
-                    if(csvRecord.get(0).contains(word) || csvRecord.get(1).contains(word) || csvRecord.get(2).contains(word) || csvRecord.get(3).contains(word) || csvRecord.get(4).contains(word)){
-                        double salary = employeeSalary(csvRecord.get(0),csvRecord.get(2),jTextField3.getText(),jTextField4.getText());
-                        double bonus = employeeBonus(csvRecord.get(0),csvRecord.get(2),jTextField3.getText(),jTextField4.getText());
+                    if(csvRecord.get(0).contains(word) || csvRecord.get(1).contains(word) || csvRecord.get(2).contains(word) || csvRecord.get(3).contains(word)){
+                        double salary = employeeSalary(csvRecord.get(0),csvRecord.get(2),txtYear.getText(),txtMonth.getText());
+                        double bonus = employeeBonus(csvRecord.get(0),csvRecord.get(2),txtYear.getText(),txtMonth.getText());
+                        //search fot salary and bonus
                         Vector row = new Vector();
                         row.add(csvRecord.get(0));
                         row.add(csvRecord.get(1));
@@ -585,8 +595,8 @@ public class EmployeePage extends javax.swing.JFrame {
                 e.printStackTrace();
             }
 
-            jTable1.setModel(NEW_EMPLOYEE);
-            jScrollPane1.setViewportView(jTable1);
+            EmployeeTable.setModel(NEW_EMPLOYEE);
+            jScrollPane1.setViewportView(EmployeeTable);
     }
 }
 

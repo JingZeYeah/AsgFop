@@ -6,6 +6,7 @@ package lecarsystem;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
@@ -24,11 +25,20 @@ import org.apache.commons.csv.CSVRecord;
  * @author jze20
  */
 public class CustomerPage extends javax.swing.JFrame {
-
+    private static String[] filePath;
+    private Function function = new Function();
     /**
      * Creates new form CustomerPage
      */
     public CustomerPage() {
+        try{
+            BufferedReader reader = new BufferedReader(new FileReader("path.txt"));
+            String line = reader.readLine();
+            filePath = line.split(",");
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
@@ -47,37 +57,50 @@ public class CustomerPage extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jEditorPane1 = new javax.swing.JEditorPane();
         jScrollPane1 = new javax.swing.JScrollPane();
-        File cust_csv = new File("cust.csv");
-        File sale_csv = new File("sales.csv");
-        DefaultTableModel cust_data = new DefaultTableModel();
-
         try{
-            int start = 0;
-            ArrayList<String> custList = new ArrayList<>();
-            InputStreamReader inputstreamreader = new InputStreamReader(new FileInputStream(cust_csv));
-            CSVParser csvParser = CSVFormat.DEFAULT.parse(inputstreamreader);
+            BufferedReader reader = new BufferedReader(new FileReader("path.txt"));
+            String line = reader.readLine();
+            String [] filepath = line.split(",");
 
-            InputStreamReader inputstreamreadersale = new InputStreamReader(new FileInputStream(sale_csv));
-            CSVParser csvParserSale = CSVFormat.DEFAULT.parse(inputstreamreadersale);
+            File cust_csv = new File(filepath[0]);
+            File sale_csv = new File(filepath[2]);
+            DefaultTableModel cust_data = new DefaultTableModel();
 
-            for(CSVRecord csvSale:csvParserSale){
-                if(LeCarSystem.employeeID.equals(csvSale.get(4))){
-                    custList.add(csvSale.get(3));
+            try{
+                int start = 0;
+                ArrayList<String> custList = new ArrayList<>();
+                InputStreamReader inputstreamreader = new InputStreamReader(new FileInputStream(cust_csv));
+                CSVParser csvParser = CSVFormat.DEFAULT.parse(inputstreamreader);
+
+                InputStreamReader inputstreamreadersale = new InputStreamReader(new FileInputStream(sale_csv));
+                CSVParser csvParserSale = CSVFormat.DEFAULT.parse(inputstreamreadersale);
+
+                for(CSVRecord csvSale:csvParserSale){
+                    if(LeCarSystem.employeeID.equals(csvSale.get(4))){
+                        custList.add(csvSale.get(3));
+                    }
                 }
-            }
 
-            for(CSVRecord csvRecord:csvParser){
-                if(start == 0){
-                    start =1;
-                    cust_data.addColumn(csvRecord.get(0));
-                    cust_data.addColumn(csvRecord.get(1));
-                    cust_data.addColumn(csvRecord.get(2));
-                    cust_data.addColumn(csvRecord.get(3));
-                }
-                else
-                {
-                    if(LeCarSystem.employeeStatus.equals("0")){
-                        if(custList.contains(csvRecord.get(0))){
+                for(CSVRecord csvRecord:csvParser){
+                    if(start == 0){
+                        start =1;
+                        cust_data.addColumn(csvRecord.get(0));
+                        cust_data.addColumn(csvRecord.get(1));
+                        cust_data.addColumn(csvRecord.get(2));
+                        cust_data.addColumn(csvRecord.get(3));
+                    }
+                    else
+                    {
+                        if(LeCarSystem.employeeStatus.equals("0")){
+                            if(custList.contains(csvRecord.get(0))){
+                                Vector row = new Vector();
+                                row.add(csvRecord.get(0));
+                                row.add(csvRecord.get(1));
+                                row.add(csvRecord.get(2));
+                                row.add(csvRecord.get(3));
+                                cust_data.addRow(row);
+                            }
+                        }else{
                             Vector row = new Vector();
                             row.add(csvRecord.get(0));
                             row.add(csvRecord.get(1));
@@ -85,80 +108,77 @@ public class CustomerPage extends javax.swing.JFrame {
                             row.add(csvRecord.get(3));
                             cust_data.addRow(row);
                         }
-                    }else{
-                        Vector row = new Vector();
-                        row.add(csvRecord.get(0));
-                        row.add(csvRecord.get(1));
-                        row.add(csvRecord.get(2));
-                        row.add(csvRecord.get(3));
-                        cust_data.addRow(row);
+
                     }
-
                 }
+            }catch (Exception e){
+                System.out.print("Error");
             }
+            jTable1 = new javax.swing.JTable();
+            jLabel1 = new javax.swing.JLabel();
+            btnAddCust = new javax.swing.JButton();
+            btnLogout = new javax.swing.JButton();
+            txtWord = new javax.swing.JTextField();
+            btnSearch = new javax.swing.JButton();
+            jLabel2 = new javax.swing.JLabel();
+            btnImport = new javax.swing.JButton();
+            jMenuBar1 = new javax.swing.JMenuBar();
+            jMenu1 = new javax.swing.JMenu();
+            jMenuItem1 = new javax.swing.JMenuItem();
+            jMenuItem2 = new javax.swing.JMenuItem();
+            jMenuItem3 = new javax.swing.JMenuItem();
+            jMenuItem4 = new javax.swing.JMenuItem();
+
+            jRadioButtonMenuItem1.setSelected(true);
+            jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
+
+            jScrollPane2.setViewportView(jEditorPane1);
+
+            setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+            jTable1.setModel(cust_data);
         }catch (Exception e){
-            System.out.print("Error");
+            e.printStackTrace();
         }
-        jTable1 = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-
-        jRadioButtonMenuItem1.setSelected(true);
-        jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
-
-        jScrollPane2.setViewportView(jEditorPane1);
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jTable1.setModel(cust_data);
         jScrollPane1.setViewportView(jTable1);
 
         jLabel1.setText("Customer");
         jLabel1.setFont(new Font("Sans-Serif",Font.BOLD,18));
 
-        jButton1.setText("Add Customer");
-        jButton1.setBackground(Color.ORANGE);
-        jButton1.setFont(new Font("Serif",Font.PLAIN,13));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnAddCust.setText("Add Customer");
+        btnAddCust.setBackground(Color.ORANGE);
+        btnAddCust.setFont(new Font("Serif",Font.PLAIN,13));
+        btnAddCust.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                AddCust(evt);
             }
         });
 
-        jButton4.setBackground(Color.BLUE);
-        jButton4.setForeground(Color.WHITE);
-        jButton4.setFont(new Font("Serif",Font.PLAIN,13));
-        jButton4.setText("Logout");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnLogout.setBackground(Color.BLUE);
+        btnLogout.setForeground(Color.WHITE);
+        btnLogout.setFont(new Font("Serif",Font.PLAIN,13));
+        btnLogout.setText("Logout");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                Logout(evt);
             }
         });
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                Search(evt);
             }
         });
 
-        jButton2.setText("Search");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jLabel2.setText("Word :");
+
+        btnImport.setText("Import");
+        btnImport.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                Import(evt);
             }
         });
-
-        jLabel2.setText("Name :");
 
         jMenu1.setText("Tables");
 
@@ -210,19 +230,22 @@ public class CustomerPage extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnAddCust, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnImport))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jButton4)
+                        .addComponent(btnLogout)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton2)
+                                .addComponent(btnSearch)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtWord, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
@@ -230,29 +253,31 @@ public class CustomerPage extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(8, Short.MAX_VALUE)
-                .addComponent(jButton4)
+                .addComponent(btnLogout)
                 .addGap(10, 10, 10)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2)
+                    .addComponent(txtWord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearch)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(6, 6, 6)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAddCust, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnImport, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(54, 54, 54))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void AddCust(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddCust
         // TODO add your handling code here:
         new AddCustomer().setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_AddCust
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
@@ -283,9 +308,9 @@ public class CustomerPage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void Logout(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Logout
         // TODO add your handling code here:
-        if (evt.getSource() == jButton4) 
+        if (evt.getSource() == btnLogout) 
         {
             int clear = JOptionPane.showConfirmDialog(null, "Logout ?");
             if (clear == JOptionPane.YES_OPTION)
@@ -297,23 +322,28 @@ public class CustomerPage extends javax.swing.JFrame {
                 
             } 
         } 
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_Logout
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void Search(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Search
         // TODO add your handling code here:
-        if(evt.getSource() == jButton2){
-            String word = jTextField1.getText();
+        if(evt.getSource() == btnSearch){
+            String word = txtWord.getText();
             try{
                 search(word);
             }catch (Exception e){
                 e.printStackTrace();
             }
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_Search
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void Import(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Import
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+        if(evt.getSource() == btnImport){
+        function.importfunction(0);
+        new CustomerPage().setVisible(true);
+        this.dispose();
+        }
+    }//GEN-LAST:event_Import
 
     /**
      * @param args the command line arguments
@@ -351,8 +381,8 @@ public class CustomerPage extends javax.swing.JFrame {
     }
     
     private void search(String word) throws Exception{
-        File cust_name = new File("cust.csv");
-        File sale_name = new File("sales.csv");
+        File cust_name = new File(filePath[0]);
+        File sale_name = new File(filePath[2]);
         DefaultTableModel NEW_CUST = new DefaultTableModel();
 
         try{
@@ -415,9 +445,10 @@ public class CustomerPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton btnAddCust;
+    private javax.swing.JButton btnImport;
+    private javax.swing.JButton btnLogout;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -431,7 +462,7 @@ public class CustomerPage extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtWord;
     // End of variables declaration//GEN-END:variables
 
 }

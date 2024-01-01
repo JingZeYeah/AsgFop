@@ -7,8 +7,10 @@ package lecarsystem;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -23,11 +25,20 @@ import org.apache.commons.csv.CSVRecord;
  * @author jze20
  */
 public class VehiclePage extends javax.swing.JFrame {
-
+    private Function function = new Function();
+    private static String[] filePath;
     /**
      * Creates new form VehiclePage
      */
     public VehiclePage() {
+        try{
+            BufferedReader reader = new BufferedReader(new FileReader("path.txt"));
+            String line = reader.readLine();
+            filePath = line.split(",");
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
@@ -43,112 +54,97 @@ public class VehiclePage extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        File vehicle_csv = new File("vehicle.csv");
-        DefaultTableModel vehicle_data = new DefaultTableModel();
-
         try{
-            int start = 0;
-            InputStreamReader inputstreamreader = new InputStreamReader(new FileInputStream(vehicle_csv));
-            CSVParser csvParser = CSVFormat.DEFAULT.parse(inputstreamreader);
+            BufferedReader reader = new BufferedReader(new FileReader("path.txt"));
+            String line = reader.readLine();
+            String [] filepath = line.split(",");
 
-            for(CSVRecord csvRecord:csvParser){
-                if(start == 0){
-                    start =1;
-                    vehicle_data.addColumn(csvRecord.get(0));
-                    vehicle_data.addColumn(csvRecord.get(1));
-                    vehicle_data.addColumn(csvRecord.get(2));
-                    vehicle_data.addColumn(csvRecord.get(3));
-                    vehicle_data.addColumn(csvRecord.get(4));
+            File vehicle_csv = new File(filepath[3]);
+            DefaultTableModel vehicle_data = new DefaultTableModel();
+
+            try{
+                int start = 0;
+                InputStreamReader inputstreamreader = new InputStreamReader(new FileInputStream(vehicle_csv));
+                CSVParser csvParser = CSVFormat.DEFAULT.parse(inputstreamreader);
+
+                for(CSVRecord csvRecord:csvParser){
+                    if(start == 0){
+                        start =1;
+                        vehicle_data.addColumn(csvRecord.get(0));
+                        vehicle_data.addColumn(csvRecord.get(1));
+                        vehicle_data.addColumn(csvRecord.get(2));
+                        vehicle_data.addColumn(csvRecord.get(3));
+                        vehicle_data.addColumn(csvRecord.get(4));
+                    }
+                    else
+                    {
+                        Vector row = new Vector();
+                        row.add(csvRecord.get(0));
+                        row.add(csvRecord.get(1));
+                        row.add(csvRecord.get(2));
+                        row.add(csvRecord.get(3));
+                        row.add(csvRecord.get(4));
+                        vehicle_data.addRow(row);
+                    }
                 }
-                else
-                {
-                    Vector row = new Vector();
-                    row.add(csvRecord.get(0));
-                    row.add(csvRecord.get(1));
-                    row.add(csvRecord.get(2));
-                    row.add(csvRecord.get(3));
-                    row.add(csvRecord.get(4));
-                    vehicle_data.addRow(row);
-                }
+            }catch (Exception e){
+                System.out.println("Error");
             }
+            VehicleTable = new javax.swing.JTable();
+            btnAddVehicle = new javax.swing.JButton();
+            jLabel1 = new javax.swing.JLabel();
+            btnLogout = new javax.swing.JButton();
+            txtAccPrice = new javax.swing.JTextField();
+            btnSearch = new javax.swing.JButton();
+            txtWord = new javax.swing.JTextField();
+            txtSalesPrice = new javax.swing.JTextField();
+            txtStatus = new javax.swing.JTextField();
+            jLabel2 = new javax.swing.JLabel();
+            jLabel3 = new javax.swing.JLabel();
+            jLabel4 = new javax.swing.JLabel();
+            jLabel5 = new javax.swing.JLabel();
+            btnImport = new javax.swing.JButton();
+            jMenuBar1 = new javax.swing.JMenuBar();
+            jMenu1 = new javax.swing.JMenu();
+            jMenuItem1 = new javax.swing.JMenuItem();
+            jMenuItem2 = new javax.swing.JMenuItem();
+            jMenuItem3 = new javax.swing.JMenuItem();
+            jMenuItem4 = new javax.swing.JMenuItem();
+
+            setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+            VehicleTable.setModel(vehicle_data);
         }catch (Exception e){
-            System.out.println("Error");
+            e.printStackTrace();
         }
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        jScrollPane1.setViewportView(VehicleTable);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jTable1.setModel(vehicle_data);
-        jScrollPane1.setViewportView(jTable1);
-
-        jButton1.setText("Add Vehicle");
-        jButton1.setBackground(Color.ORANGE);
-        jButton1.setFont(new Font("Serif",Font.PLAIN,13));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnAddVehicle.setText("Add Vehicle");
+        btnAddVehicle.setBackground(Color.ORANGE);
+        btnAddVehicle.setFont(new Font("Serif",Font.PLAIN,13));
+        btnAddVehicle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                AddVehicle(evt);
             }
         });
 
         jLabel1.setText("Vehicle");
         jLabel1.setFont(new Font("Sans-Serif",Font.BOLD,18));
 
-        jButton4.setBackground(Color.BLUE);
-        jButton4.setForeground(Color.WHITE);
-        jButton4.setFont(new Font("Serif",Font.PLAIN,13));
-        jButton4.setText("Logout");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnLogout.setBackground(Color.BLUE);
+        btnLogout.setForeground(Color.WHITE);
+        btnLogout.setFont(new Font("Serif",Font.PLAIN,13));
+        btnLogout.setText("Logout");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                Logout(evt);
             }
         });
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Search");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
-
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
-            }
-        });
-
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                Search(evt);
             }
         });
 
@@ -158,7 +154,14 @@ public class VehiclePage extends javax.swing.JFrame {
 
         jLabel4.setText("Sales Price :");
 
-        jLabel5.setText("Name :");
+        jLabel5.setText("Word :");
+
+        btnImport.setText("Import");
+        btnImport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Import(evt);
+            }
+        });
 
         jMenu1.setText("Tables");
 
@@ -209,27 +212,30 @@ public class VehiclePage extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(521, 521, 521)
-                        .addComponent(jButton4))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnLogout))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(btnAddVehicle, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnImport))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 692, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(jButton2)
+                            .addComponent(btnSearch)
                             .addGap(18, 18, 18)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtAccPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel2))
                             .addGap(18, 18, 18)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGap(18, 18, 18)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtSalesPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGap(18, 18, 18)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtWord, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
@@ -239,7 +245,7 @@ public class VehiclePage extends javax.swing.JFrame {
                 .addContainerGap(12, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton4)
+                        .addComponent(btnLogout)
                         .addGap(44, 44, 44))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -251,15 +257,17 @@ public class VehiclePage extends javax.swing.JFrame {
                             .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnSearch)
+                    .addComponent(txtAccPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtWord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSalesPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(14, 14, 14)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAddVehicle, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnImport))
                 .addGap(28, 28, 28))
         );
 
@@ -283,11 +291,11 @@ public class VehiclePage extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void AddVehicle(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddVehicle
         // TODO add your handling code here:
         new AddVehicle().setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_AddVehicle
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
@@ -297,9 +305,9 @@ public class VehiclePage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void Logout(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Logout
         // TODO add your handling code here:
-        if (evt.getSource() == jButton4) 
+        if (evt.getSource() == btnLogout) 
         {
             int clear = JOptionPane.showConfirmDialog(null, "Logout ?");
             if (clear == JOptionPane.YES_OPTION)
@@ -312,15 +320,15 @@ public class VehiclePage extends javax.swing.JFrame {
             } 
         } 
 
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_Logout
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void Search(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Search
         // TODO add your handling code here:
-        if(evt.getSource() == jButton2){
-            String word = jTextField2.getText();
-            String salesInput = jTextField3.getText();
-            String accquireInput = jTextField1.getText();
-            String carStatus = jTextField4.getText();
+        if(evt.getSource() == btnSearch){
+            String word = txtWord.getText();
+            String salesInput = txtSalesPrice.getText();
+            String accquireInput = txtAccPrice.getText();
+            String carStatus = txtStatus.getText();
             int sales,accquire;
             String status;
 
@@ -339,23 +347,16 @@ public class VehiclePage extends javax.swing.JFrame {
                 e.printStackTrace();
             }
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_Search
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void Import(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Import
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
-
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
-
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+        if(evt.getSource() == btnImport){
+        function.importfunction(3);
+        new VehiclePage().setVisible(true);
+        this.dispose();
+        }
+    }//GEN-LAST:event_Import
 
     /**
      * @param args the command line arguments
@@ -393,7 +394,7 @@ public class VehiclePage extends javax.swing.JFrame {
     }
     
     private void searchfilter(String word,int sales, int accquire, String status) throws Exception{
-        File vehicle_csv = new File("vehicle.csv");
+        File vehicle_csv = new File(filePath[3]);
         DefaultTableModel NEW_VEHICLE = new DefaultTableModel();
 
         try{
@@ -441,14 +442,16 @@ public class VehiclePage extends javax.swing.JFrame {
                 e.printStackTrace();
             }
 
-            jTable1.setModel(NEW_VEHICLE);
-            jScrollPane1.setViewportView(jTable1);
+            VehicleTable.setModel(NEW_VEHICLE);
+            jScrollPane1.setViewportView(VehicleTable);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JTable VehicleTable;
+    private javax.swing.JButton btnAddVehicle;
+    private javax.swing.JButton btnImport;
+    private javax.swing.JButton btnLogout;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -461,10 +464,9 @@ public class VehiclePage extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField txtAccPrice;
+    private javax.swing.JTextField txtSalesPrice;
+    private javax.swing.JTextField txtStatus;
+    private javax.swing.JTextField txtWord;
     // End of variables declaration//GEN-END:variables
 }

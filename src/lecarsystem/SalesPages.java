@@ -11,9 +11,13 @@ import org.apache.commons.csv.CSVRecord;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -25,17 +29,27 @@ import static lecarsystem.LeCarSystem.employeeStatus;
  * @author jze20
  */
 public class SalesPages extends javax.swing.JFrame {
-
+    private static String fileSource;
+    private Function function = new Function();
     /**
      * Creates new form SalesPages
      */
  
     
     public SalesPages() {
+        try{
+            BufferedReader reader = new BufferedReader(new FileReader("path.txt"));
+            String line = reader.readLine();
+            String [] filepath = line.split(",");
+            fileSource = filepath[2];
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -46,30 +60,45 @@ public class SalesPages extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        File sales_csv = new File("sales.csv");
-        DefaultTableModel sales_data = new DefaultTableModel();
-
         try{
-            int start = 0;
-            InputStreamReader inputstreamreader = new InputStreamReader(new FileInputStream(sales_csv));
-            CSVParser csvParser = CSVFormat.DEFAULT.parse(inputstreamreader);
+            BufferedReader reader = new BufferedReader(new FileReader("path.txt"));
+            String line = reader.readLine();
+            String [] filepath = line.split(",");
 
-            for(CSVRecord csvRecord:csvParser){
-                if(start == 0){
-                    start =1;
-                    sales_data.addColumn(csvRecord.get(0));
-                    sales_data.addColumn(csvRecord.get(1));
-                    sales_data.addColumn(csvRecord.get(2));
-                    sales_data.addColumn(csvRecord.get(3));
-                    sales_data.addColumn(csvRecord.get(4));
-                }
-                else
-                {
-                    if(LeCarSystem.employeeStatus == "0"){
-                        if(LeCarSystem.employeeID.equals(csvRecord.get(4))){
+            File sales_csv = new File(filepath[2]);
+            DefaultTableModel sales_data = new DefaultTableModel();
+
+            try{
+                int start = 0;
+                InputStreamReader inputstreamreader = new InputStreamReader(new FileInputStream(sales_csv));
+                CSVParser csvParser = CSVFormat.DEFAULT.parse(inputstreamreader);
+
+                for(CSVRecord csvRecord:csvParser){
+                    if(start == 0){
+                        start =1;
+                        sales_data.addColumn(csvRecord.get(0));
+                        sales_data.addColumn(csvRecord.get(1));
+                        sales_data.addColumn(csvRecord.get(2));
+                        sales_data.addColumn(csvRecord.get(3));
+                        sales_data.addColumn(csvRecord.get(4));
+                    }
+                    else
+                    {
+                        if(LeCarSystem.employeeStatus == "0"){
+                            if(LeCarSystem.employeeID.equals(csvRecord.get(4))){
+                                Vector row = new Vector();
+                                row.add(csvRecord.get(0));
+                                row.add(csvRecord.get(1));
+                                row.add(csvRecord.get(2));
+                                row.add(csvRecord.get(3));
+                                row.add(csvRecord.get(4));
+                                sales_data.addRow(row);
+
+                            }
+
+                        }else{
                             Vector row = new Vector();
                             row.add(csvRecord.get(0));
                             row.add(csvRecord.get(1));
@@ -77,99 +106,68 @@ public class SalesPages extends javax.swing.JFrame {
                             row.add(csvRecord.get(3));
                             row.add(csvRecord.get(4));
                             sales_data.addRow(row);
-
                         }
 
-                    }else{
-                        Vector row = new Vector();
-                        row.add(csvRecord.get(0));
-                        row.add(csvRecord.get(1));
-                        row.add(csvRecord.get(2));
-                        row.add(csvRecord.get(3));
-                        row.add(csvRecord.get(4));
-                        sales_data.addRow(row);
                     }
-
                 }
-            }
 
-        }catch (Exception e){
-            System.out.println("Error");
+            }catch (Exception e){
+                System.out.println("Error");
+            }
+            SalesTable = new javax.swing.JTable();
+            btnAddSales = new javax.swing.JButton();
+            btnLogout = new javax.swing.JButton();
+            btnSearch = new javax.swing.JButton();
+            txtName = new javax.swing.JTextField();
+            txtYear = new javax.swing.JTextField();
+            txtMonth = new javax.swing.JTextField();
+            jLabel2 = new javax.swing.JLabel();
+            jLabel3 = new javax.swing.JLabel();
+            jLabel4 = new javax.swing.JLabel();
+            btnImport = new javax.swing.JButton();
+            jMenuBar1 = new javax.swing.JMenuBar();
+            jMenu1 = new javax.swing.JMenu();
+            jMenuItem1 = new javax.swing.JMenuItem();
+            jMenuItem2 = new javax.swing.JMenuItem();
+            jMenuItem3 = new javax.swing.JMenuItem();
+            jMenuItem4 = new javax.swing.JMenuItem();
+
+            setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+            jLabel1.setText("Sales");
+            jLabel1.setFont(new Font("Sans-Serif",Font.BOLD,18));
+
+            jScrollPane1.getViewport().add(SalesTable);
+
+            SalesTable.setModel(sales_data);
+        }catch(Exception e){
+            e.printStackTrace();
         }
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        jScrollPane1.setViewportView(SalesTable);
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        btnAddSales.setText("Add Sales");
+        btnAddSales.setBackground(Color.ORANGE);
+        btnAddSales.setFont(new Font("Serif",Font.PLAIN,13));
+        btnAddSales.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                AddSales(evt);
             }
         });
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel1.setText("Sales");
-        jLabel1.setFont(new Font("Sans-Serif",Font.BOLD,18));
-
-        jScrollPane1.getViewport().add(jTable1);
-
-        jTable1.setModel(sales_data);
-        jScrollPane1.setViewportView(jTable1);
-
-        jButton1.setText("Add Sales");
-        jButton1.setBackground(Color.ORANGE);
-        jButton1.setFont(new Font("Serif",Font.PLAIN,13));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnLogout.setBackground(Color.BLUE);
+        btnLogout.setForeground(Color.WHITE);
+        btnLogout.setFont(new Font("Serif",Font.PLAIN,13));
+        btnLogout.setText("Logout");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                Logout(evt);
             }
         });
 
-        jButton2.setBackground(Color.BLUE);
-        jButton2.setForeground(Color.WHITE);
-        jButton2.setFont(new Font("Serif",Font.PLAIN,13));
-        jButton2.setText("Logout");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        jButton3.setText("Search");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
-
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
-            }
-        });
-
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                Search(evt);
             }
         });
 
@@ -177,7 +175,14 @@ public class SalesPages extends javax.swing.JFrame {
 
         jLabel3.setText("Month :");
 
-        jLabel4.setText("Name :");
+        jLabel4.setText("Word :");
+
+        btnImport.setText("Import");
+        btnImport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Import(evt);
+            }
+        });
 
         jMenu1.setText("Tables");
 
@@ -225,28 +230,31 @@ public class SalesPages extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(btnAddSales, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnImport))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton2)
+                    .addComponent(btnLogout)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)
+                        .addComponent(btnSearch)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(57, 57, 57))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(14, 33, Short.MAX_VALUE))
         );
@@ -254,7 +262,7 @@ public class SalesPages extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(21, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(btnLogout)
                 .addGap(3, 3, 3)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -263,25 +271,27 @@ public class SalesPages extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnSearch)
+                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAddSales, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnImport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(54, 54, 54))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void AddSales(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddSales
         // TODO add your handling code here:
         new AddSales().setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_AddSales
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
@@ -307,9 +317,9 @@ public class SalesPages extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        if (evt.getSource() == jButton2) 
+    private void Logout(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Logout
+        //btnLogoutn2d your handling code here:
+        if (evt.getSource() == btnLogout) 
         {
             int clear = JOptionPane.showConfirmDialog(null, "Logout ?");
             if (clear == JOptionPane.YES_OPTION)
@@ -321,14 +331,14 @@ public class SalesPages extends javax.swing.JFrame {
                 
             } 
         } 
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_Logout
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void Search(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Search
         // TODO add your handling code here:
-        if(evt.getSource() == jButton3){
-            String word = jTextField2.getText();
-            String yearInput = jTextField3.getText();
-            String monthInput = jTextField4.getText();
+        if(evt.getSource() == btnSearch){
+            String word = txtName.getText();
+            String yearInput = txtYear.getText();
+            String monthInput = txtMonth.getText();
             int year,month;
             
             if (yearInput.isEmpty()){year = 0;}
@@ -343,29 +353,21 @@ public class SalesPages extends javax.swing.JFrame {
                 e.printStackTrace();
             }
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_Search
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void Import(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Import
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
-
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
-
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+        if(evt.getSource() == btnImport){
+        function.importfunction(2);
+        new SalesPages().setVisible(true);
+        this.dispose();
+        }
+    }//GEN-LAST:event_Import
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -392,7 +394,6 @@ public class SalesPages extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
                 new SalesPages().setVisible(true);
                 
             }
@@ -400,7 +401,7 @@ public class SalesPages extends javax.swing.JFrame {
     }
     
     private void searchFilter(String word, int month, int year) throws Exception{
-        File sales_csv = new File("sales.csv");
+        File sales_csv = new File(fileSource);
         DefaultTableModel NEW_SALES = new DefaultTableModel();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
 
@@ -471,14 +472,16 @@ public class SalesPages extends javax.swing.JFrame {
             e.printStackTrace();
         }
         
-        jTable1.setModel(NEW_SALES);
-        jScrollPane1.setViewportView(jTable1);
+        SalesTable.setModel(NEW_SALES);
+        jScrollPane1.setViewportView(SalesTable);
     }   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JTable SalesTable;
+    private javax.swing.JButton btnAddSales;
+    private javax.swing.JButton btnImport;
+    private javax.swing.JButton btnLogout;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -490,10 +493,8 @@ public class SalesPages extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField txtMonth;
+    private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtYear;
     // End of variables declaration//GEN-END:variables
 }

@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package lecarsystem;
+
 import au.com.bytecode.opencsv.CSVReader;
 import au.com.bytecode.opencsv.CSVWriter;
 import java.text.SimpleDateFormat;
@@ -27,6 +28,8 @@ import org.apache.commons.csv.CSVRecord;
  * @author jze20
  */
 public class AddSales extends javax.swing.JFrame {
+    //Storing CVS file in ArrayList that will be used later for checking
+        Function readCSV = new Function();
 
     /**
      * Creates new form AddSales
@@ -48,21 +51,21 @@ public class AddSales extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtDateTime = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtCarPlate = new javax.swing.JTextField();
         jPanel6 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        txtCustID = new javax.swing.JTextField();
         jPanel7 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        txtPrice = new javax.swing.JTextField();
         jPanel8 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnAdd = new javax.swing.JButton();
+        btnClear = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -78,8 +81,8 @@ public class AddSales extends javax.swing.JFrame {
         Date currentDate = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
         String formattedDate = dateFormat.format(currentDate);
-        jTextField1.setText(formattedDate);
-        jTextField1.setEditable(false);
+        txtDateTime.setText(formattedDate);
+        txtDateTime.setEditable(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -89,7 +92,7 @@ public class AddSales extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtDateTime, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -97,7 +100,7 @@ public class AddSales extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                    .addComponent(txtDateTime, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -108,12 +111,6 @@ public class AddSales extends javax.swing.JFrame {
         jLabel3.setText("Car Plate :");
         jLabel3.setFont(new Font("Serif",Font.PLAIN,13));
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -122,7 +119,7 @@ public class AddSales extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtCarPlate, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -130,19 +127,13 @@ public class AddSales extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                    .addComponent(txtCarPlate, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
         jLabel7.setText("Customer ID :");
         jLabel7.setFont(new Font("Serif",Font.PLAIN,13));
-
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -152,7 +143,7 @@ public class AddSales extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtCustID, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
@@ -160,19 +151,13 @@ public class AddSales extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                    .addComponent(txtCustID, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
         jLabel8.setText("Price (RM) :");
         jLabel8.setFont(new Font("Serif",Font.PLAIN,13));
-
-        jTextField7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField7ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -182,7 +167,7 @@ public class AddSales extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
@@ -190,38 +175,38 @@ public class AddSales extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                    .addComponent(txtPrice, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        jButton1.setText("Add");
-        jButton1.setFont(new Font("Serif",Font.PLAIN,13));
-        jButton1.setBackground(Color.GREEN);
-        jButton1.setForeground(Color.WHITE);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnAdd.setText("Add");
+        btnAdd.setFont(new Font("Serif",Font.PLAIN,13));
+        btnAdd.setBackground(Color.GREEN);
+        btnAdd.setForeground(Color.WHITE);
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                Add(evt);
             }
         });
 
-        jButton2.setText("Clear");
-        jButton2.setFont(new Font("Serif",Font.PLAIN,13));
-        jButton2.setBackground(Color.BLUE);
-        jButton2.setForeground(Color.WHITE);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnClear.setText("Clear");
+        btnClear.setFont(new Font("Serif",Font.PLAIN,13));
+        btnClear.setBackground(Color.BLUE);
+        btnClear.setForeground(Color.WHITE);
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                Clear(evt);
             }
         });
 
-        jButton3.setText("Back");
-        jButton3.setFont(new Font("Serif",Font.PLAIN,13));
-        jButton3.setBackground(Color.RED);
-        jButton3.setForeground(Color.WHITE);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnBack.setText("Back");
+        btnBack.setFont(new Font("Serif",Font.PLAIN,13));
+        btnBack.setBackground(Color.RED);
+        btnBack.setForeground(Color.WHITE);
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                Back(evt);
             }
         });
 
@@ -231,11 +216,11 @@ public class AddSales extends javax.swing.JFrame {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 69, Short.MAX_VALUE)
+                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 69, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
@@ -243,9 +228,9 @@ public class AddSales extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnClear, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                    .addComponent(btnBack, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAdd, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -326,20 +311,12 @@ public class AddSales extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void Add(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Add
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
-
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        if(evt.getSource() == jButton1){
-            String carplate = jTextField2.getText();
-            String custid = jTextField6.getText();
-            String price = jTextField7.getText();
+        if(evt.getSource() == btnAdd){
+            String carplate = txtCarPlate.getText();
+            String custid = txtCustID.getText();
+            String price = txtPrice.getText();
            
             if(carplate.hashCode() == 0)
             {
@@ -356,7 +333,7 @@ public class AddSales extends javax.swing.JFrame {
             else if (!price.matches("-?\\d+(\\.\\d+)?")) 
             {
                 JOptionPane.showMessageDialog(null, "Incorrect format at Price field!\nPlease fill it again. ", "Alert", JOptionPane.WARNING_MESSAGE);
-                jTextField7.setText("");
+                txtPrice.setText("");
             }
             else
             {
@@ -370,28 +347,28 @@ public class AddSales extends javax.swing.JFrame {
             }
         }
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_Add
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void Back(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Back
         // TODO add your handling code here:
         new SalesPages().setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_Back
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void Clear(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Clear
         // TODO add your handling code here:
-        if (evt.getSource() == jButton2) 
+        if (evt.getSource() == btnClear) 
         {
             int clear = JOptionPane.showConfirmDialog(null, "Are you sure?");
             if (clear == JOptionPane.YES_OPTION)
             {
-               jTextField2.setText("");
-               jTextField6.setText("");            
-               jTextField7.setText("");          
+               txtCarPlate.setText("");
+               txtCustID.setText("");            
+               txtPrice.setText("");          
                JOptionPane.showMessageDialog(null, "Input has been cleared");
             } 
         } 
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_Clear
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
@@ -408,10 +385,6 @@ public class AddSales extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_jMenuItem3ActionPerformed
-
-    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField7ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
@@ -457,9 +430,9 @@ public class AddSales extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnClear;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -476,10 +449,10 @@ public class AddSales extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField txtCarPlate;
+    private javax.swing.JTextField txtCustID;
+    private javax.swing.JTextField txtDateTime;
+    private javax.swing.JTextField txtPrice;
     // End of variables declaration//GEN-END:variables
 
     private void validateSales() throws Exception{
@@ -488,12 +461,13 @@ public class AddSales extends javax.swing.JFrame {
         
         String carStatus = null;
         
-        String carplate = jTextField2.getText();
-        String custid = jTextField6.getText();
-        String price = jTextField7.getText();
+        String carplate = txtCarPlate.getText();
+        String custid = txtCustID.getText();
+        String price = txtPrice.getText();
         
-        List<String[]> custData = readCsvFile(fileCust);
-        List<String[]> vehicleData = readCsvFile(fileVehicle);
+        
+        List<String[]> custData = readCSV.readCsvFile(fileCust);
+        List<String[]> vehicleData = readCSV.readCsvFile(fileVehicle);
         
         boolean custExist = false; 
         boolean vehicleExist = false;
@@ -574,12 +548,12 @@ public class AddSales extends javax.swing.JFrame {
     private void insertSale() throws Exception {
         String fileSale = "salestest.csv";
         
-        String dateTime = jTextField1.getText();
-        String carplate = jTextField2.getText();
-        String custid = jTextField6.getText();
-        String price = jTextField7.getText();
+        String dateTime = txtDateTime.getText();
+        String carplate = txtCarPlate.getText();
+        String custid = txtCustID.getText();
+        String price = txtPrice.getText();
         
-        List<String[]> saleData = readCsvFile(fileSale);
+        List<String[]> saleData = readCSV.readCsvFile(fileSale);
         
         boolean fileExists = new File(fileSale).exists();
               
@@ -618,34 +592,14 @@ public class AddSales extends javax.swing.JFrame {
             fw.flush();
             fw.close();
             JOptionPane.showMessageDialog(null, "Data has been saved.");
-            jTextField2.setText("");
-            jTextField6.setText("");
-            jTextField7.setText("");
+            txtCarPlate.setText("");
+            txtCustID.setText("");
+            txtPrice.setText("");
 
         } catch (IOException e) {
             System.err.println("An error occurred while creating the CSV file: " + e.getMessage());
             JOptionPane.showMessageDialog(null, "Error!!!\nThe CSV file is in used.\nPlease make sure it is close when in use.", "Alert", JOptionPane.WARNING_MESSAGE);
         }
-    }
-    
-    //Storing CVS file in ArrayList that will be used later for checking
-    private List<String[]> readCsvFile(String fileName) throws IOException {
-        
-        List<String[]> records = new ArrayList<>();
-
-        try (FileReader reader = new FileReader(fileName);
-             CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT)) {
-
-            for (CSVRecord csvRecord : csvParser) {
-                String[] record = new String[csvRecord.size()];
-                for (int i = 0; i < csvRecord.size(); i++) {
-                    record[i] = csvRecord.get(i);
-                }
-                records.add(record);
-            }
-        }
-
-        return records;
     }
     
     private static int findRowIndexById(List<String[]> rows, String targetId) {

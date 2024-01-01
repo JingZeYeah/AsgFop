@@ -137,7 +137,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel3" min="-2" pref="90" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jTextField2" min="-2" pref="135" max="-2" attributes="0"/>
+                  <Component id="txtCustName" min="-2" pref="135" max="-2" attributes="0"/>
                   <EmptySpace pref="23" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -147,7 +147,7 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jTextField2" alignment="0" pref="28" max="32767" attributes="0"/>
+                      <Component id="txtCustName" alignment="0" pref="28" max="32767" attributes="0"/>
                       <Component id="jLabel3" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -164,10 +164,7 @@
             <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jLabel3.setFont(new Font(&quot;Serif&quot;,Font.PLAIN,13));"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField2">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField2ActionPerformed"/>
-          </Events>
+        <Component class="javax.swing.JTextField" name="txtCustName">
         </Component>
       </SubComponents>
     </Container>
@@ -180,7 +177,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel7" min="-2" pref="90" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jTextField6" min="-2" pref="135" max="-2" attributes="0"/>
+                  <Component id="txtPhoneNum" min="-2" pref="135" max="-2" attributes="0"/>
                   <EmptySpace pref="23" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -190,7 +187,7 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jTextField6" alignment="0" pref="28" max="32767" attributes="0"/>
+                      <Component id="txtPhoneNum" alignment="0" pref="28" max="32767" attributes="0"/>
                       <Component id="jLabel7" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -207,10 +204,7 @@
             <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jLabel7.setFont(new Font(&quot;Serif&quot;,Font.PLAIN,13));"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField6">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField6ActionPerformed"/>
-          </Events>
+        <Component class="javax.swing.JTextField" name="txtPhoneNum">
         </Component>
       </SubComponents>
     </Container>
@@ -223,7 +217,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel8" min="-2" pref="90" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jTextField7" min="-2" pref="135" max="-2" attributes="0"/>
+                  <Component id="txtPostcode" min="-2" pref="135" max="-2" attributes="0"/>
                   <EmptySpace pref="23" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -233,7 +227,7 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jTextField7" alignment="0" pref="28" max="32767" attributes="0"/>
+                      <Component id="txtPostcode" alignment="0" pref="28" max="32767" attributes="0"/>
                       <Component id="jLabel8" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -250,10 +244,7 @@
             <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jLabel8.setFont(new Font(&quot;Serif&quot;,Font.PLAIN,13));"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField7">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField7ActionPerformed"/>
-          </Events>
+        <Component class="javax.swing.JTextField" name="txtPostcode">
         </Component>
       </SubComponents>
     </Container>
@@ -264,11 +255,11 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jButton1" min="-2" pref="51" max="-2" attributes="0"/>
+                  <Component id="btnAdd" min="-2" pref="51" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jButton2" min="-2" pref="65" max="-2" attributes="0"/>
+                  <Component id="btnClear" min="-2" pref="65" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jButton3" pref="69" max="32767" attributes="0"/>
+                  <Component id="btnBack" pref="69" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -278,9 +269,9 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="jButton2" alignment="0" pref="31" max="32767" attributes="0"/>
-                      <Component id="jButton3" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jButton1" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnClear" alignment="0" pref="31" max="32767" attributes="0"/>
+                      <Component id="btnBack" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnAdd" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -288,37 +279,37 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="btnAdd">
           <Properties>
             <Property name="text" type="java.lang.String" value="Add"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Add"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jButton1.setFont(new Font(&quot;Serif&quot;,Font.PLAIN,13));&#xa;jButton1.setBackground(Color.GREEN);&#xa;jButton1.setForeground(Color.WHITE);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="btnAdd.setFont(new Font(&quot;Serif&quot;,Font.PLAIN,13));&#xa;btnAdd.setBackground(Color.GREEN);&#xa;btnAdd.setForeground(Color.WHITE);"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton2">
+        <Component class="javax.swing.JButton" name="btnClear">
           <Properties>
             <Property name="text" type="java.lang.String" value="Clear"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Clear"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jButton2.setFont(new Font(&quot;Serif&quot;,Font.PLAIN,13));&#xa;jButton2.setBackground(Color.BLUE);&#xa;jButton2.setForeground(Color.WHITE);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="btnClear.setFont(new Font(&quot;Serif&quot;,Font.PLAIN,13));&#xa;btnClear.setBackground(Color.BLUE);&#xa;btnClear.setForeground(Color.WHITE);"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton3">
+        <Component class="javax.swing.JButton" name="btnBack">
           <Properties>
             <Property name="text" type="java.lang.String" value="Back"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Back"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jButton3.setFont(new Font(&quot;Serif&quot;,Font.PLAIN,13));&#xa;jButton3.setBackground(Color.RED);&#xa;jButton3.setForeground(Color.WHITE);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="btnBack.setFont(new Font(&quot;Serif&quot;,Font.PLAIN,13));&#xa;btnBack.setBackground(Color.RED);&#xa;btnBack.setForeground(Color.WHITE);"/>
           </AuxValues>
         </Component>
       </SubComponents>
