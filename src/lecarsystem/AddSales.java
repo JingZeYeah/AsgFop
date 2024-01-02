@@ -28,13 +28,23 @@ import org.apache.commons.csv.CSVRecord;
  * @author jze20
  */
 public class AddSales extends javax.swing.JFrame {
+    private static String [] filePath;
     //Storing CVS file in ArrayList that will be used later for checking
-        Function readCSV = new Function();
+    Function readCSV = new Function();
 
     /**
      * Creates new form AddSales
      */
     public AddSales() {
+        try{
+            BufferedReader reader = new BufferedReader(new FileReader("path.txt"));
+            String line = reader.readLine();
+            filePath = line.split(",");
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
@@ -456,8 +466,8 @@ public class AddSales extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void validateSales() throws Exception{
-        String fileCust = "custtest.csv";
-        String fileVehicle = "vehicletest.csv";
+        String fileCust = filePath[0];
+        String fileVehicle = filePath[3];
         
         String carStatus = null;
         
@@ -546,7 +556,7 @@ public class AddSales extends javax.swing.JFrame {
     
     
     private void insertSale() throws Exception {
-        String fileSale = "salestest.csv";
+        String fileSale = filePath[2];
         
         String dateTime = txtDateTime.getText();
         String carplate = txtCarPlate.getText();
