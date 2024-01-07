@@ -15,7 +15,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
-import static lecarsystem.LeCarSystem.employeeStatus;
+import static lecarsystem.Login.employeeStatus;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -39,6 +39,7 @@ public class CustomerPage extends javax.swing.JFrame {
         }catch (Exception e){
             e.printStackTrace();
         }
+        
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
@@ -76,7 +77,7 @@ public class CustomerPage extends javax.swing.JFrame {
                 CSVParser csvParserSale = CSVFormat.DEFAULT.parse(inputstreamreadersale);
 
                 for(CSVRecord csvSale:csvParserSale){
-                    if(LeCarSystem.employeeID.equals(csvSale.get(4))){
+                    if(lecarsystem.Login.employeeID.equals(csvSale.get(4))){
                         custList.add(csvSale.get(3));
                     }
                 }
@@ -91,7 +92,7 @@ public class CustomerPage extends javax.swing.JFrame {
                     }
                     else
                     {
-                        if(LeCarSystem.employeeStatus.equals("0")){
+                        if(lecarsystem.Login.employeeStatus.equals("0")){
                             if(custList.contains(csvRecord.get(0))){
                                 Vector row = new Vector();
                                 row.add(csvRecord.get(0));
@@ -209,7 +210,7 @@ public class CustomerPage extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem3);
 
-        if(LeCarSystem.employeeStatus == "1"){
+        if(lecarsystem.Login.employeeStatus == "1"){
             jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.ALT_DOWN_MASK));
             jMenuItem4.setText("Employee");
             jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
@@ -270,6 +271,10 @@ public class CustomerPage extends javax.swing.JFrame {
                 .addGap(54, 54, 54))
         );
 
+        if(lecarsystem.Login.employeeStatus == "0"){
+            btnImport.setVisible(false);
+        }
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -317,7 +322,7 @@ public class CustomerPage extends javax.swing.JFrame {
             {  
                 JOptionPane.showMessageDialog(null,"Logout Successful");
                 employeeStatus = "0";
-                new LeCarSystem().setVisible(true);
+                new Login().setVisible(true);
                 this.dispose();
                 
             } 
@@ -395,7 +400,7 @@ public class CustomerPage extends javax.swing.JFrame {
             CSVParser csvParserSale = CSVFormat.DEFAULT.parse(inputstreamreadersale);
 
             for(CSVRecord csvSale:csvParserSale){
-                if(LeCarSystem.employeeID.equals(csvSale.get(4))){             
+                if(Login.employeeID.equals(csvSale.get(4))){             
                     custList.add(csvSale.get(3));
                 }
             }
@@ -410,7 +415,7 @@ public class CustomerPage extends javax.swing.JFrame {
                 }
                 else
                 { 
-                    if(LeCarSystem.employeeStatus.equals("0")){
+                    if(Login.employeeStatus.equals("0")){
                         if(custList.contains(csvRecord.get(0))){
                             if(csvRecord.get(0).contains(word) || csvRecord.get(1).contains(word) || csvRecord.get(2).contains(word) || csvRecord.get(3).contains(word)){
                                 Vector row = new Vector();
